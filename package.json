@@ -1,0 +1,9 @@
+{
+  "name": "cmkeeper",
+  "author": "Alex Danilenko <alxdnlnko@gmail.com>",
+  "version": "0.0.1",
+  "private": false,
+  "dependencies": {},
+  "devDependencies": {
+  }
+}
