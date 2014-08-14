@@ -1,0 +1,36 @@
+.notes-bar
+  z-index $z-index-notes-bar
+  shadow-1()
+
+.notes-block
+  padding-bottom 32px
+
+  &--open
+    .notes-block-toggle
+      transform rotateZ(90deg)
+
+.notes-block-header
+  position relative
+  padding 0 16px
+  height 48px
+  line-height 48px
+  color $color-text-light
+  font-size 14px
+  font-weight 300
+
+.notes-block-toggle
+  position absolute
+  right 16px
+  top 16px
+  transition transform ease-in-out .3s
+
+.note
+  padding 0 16px
+  height 48px
+  line-height 48px
+  color $color-text-middle
+  font-size 16px
+  font-weight 400
+
+  &--active
+    color $color-base

@@ -1,0 +1,21 @@
+@import 'nib'
+
+global-reset()
+reset-html5()
+
+*
+  box-sizing border-box
+
+@import 'index/variables'
+
+// font settings
+body
+  font-family 'RobotoDraft', 'sans-serif'
+  font-size 14px
+  font-weight 300
+  color $color-text-black
+
+@import 'index/layout'
+@import 'functions'
+@import 'index/nav-bar'
+@import 'index/content'

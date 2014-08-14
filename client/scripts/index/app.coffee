@@ -1,6 +1,7 @@
 require 'angular'
 
-PageCtrl = require './controllers/pagectrl'
-
+# define the module
 angular.module 'cmIndex', []
-  .controller 'PageCtrl', ['$scope', PageCtrl]
+
+# import controllers
+require './controllers/pagectrl'
