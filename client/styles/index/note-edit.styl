@@ -1,0 +1,57 @@
+// *****************************************
+//  Editor header
+// *****************************************
+.note-edit-header
+  @extend .note-view-header
+  padding 0 16px
+
+.note-edit-name
+  padding 2px 0
+  width 500px
+  border 0
+  border-bottom 2px solid $color-blue
+  font-family 'RobotoDraft', 'sans-serif'
+  font-size 24px
+  font-weight 300
+  color $color-text-black
+
+
+// *****************************************
+//  Note actions
+// *****************************************
+.note-edit-actions
+  display inline-block
+
+.note-edit-action
+  @extend .note-view-action
+
+  &--save
+    &:hover
+      color $color-blue
+
+  &--cancel
+    &:hover
+      color $color-red
+
+
+// *****************************************
+//  Note edit extras
+// *****************************************
+.note-edit-extras
+  @extend .note-view-extras
+
+.note-edit-extra
+  @extend .note-view-extra
+
+
+// *****************************************
+//  Editor
+// *****************************************
+.note-edit-content
+  @extend .note-view-content
+
+.note-edit-editor
+  min-width 100%
+  min-height 100%
+  height 100%
+  border none

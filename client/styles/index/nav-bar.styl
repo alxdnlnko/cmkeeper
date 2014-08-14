@@ -2,6 +2,7 @@
   z-index $z-index-nav-bar
   color $color-white
   background-color $color-dark-bk
+  user-select none
 
 .nav-bar-header
   padding 0 16px
@@ -9,6 +10,7 @@
   font-size 30px
   font-weight 100
   line-height $nav-bar-header-height
+  cursor default
 
 .nav-bar-categories
   padding 16px 0
@@ -17,9 +19,12 @@
   padding 0 16px
   height 48px
   line-height 48px
+  cursor pointer
+
+  &:hover
+    background-color lighten($color-dark-bk, 2%)
 
   &--active
-    padding-left 14px
     color $color-white
     font-weight 500
-    border-left 2px solid $color-base
+    background-color lighten($color-dark-bk, 5%)

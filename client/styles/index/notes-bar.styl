@@ -3,11 +3,18 @@
   shadow-1()
 
 .notes-block
-  padding-bottom 32px
+  overflow hidden
+
+  :not(&--open)
+    .notes-list
+      display none
 
   &--open
     .notes-block-toggle
       transform rotateZ(90deg)
+
+    .notes-list
+      display block
 
 .notes-block-header
   position relative
@@ -17,12 +24,20 @@
   color $color-text-light
   font-size 14px
   font-weight 300
+  cursor pointer
+  user-select none
+
+  &:hover
+    background-color darken($color-white, 5%)
 
 .notes-block-toggle
   position absolute
   right 16px
   top 16px
-  transition transform ease-in-out .3s
+  transition transform ease-in-out .2s
+
+.notes-list
+  padding-bottom 24px
 
 .note
   padding 0 16px
@@ -31,6 +46,12 @@
   color $color-text-middle
   font-size 16px
   font-weight 400
+  user-select none
+
+  &:hover:not(&--active)
+    cursor pointer
+    background-color darken($color-white, 5%)
 
   &--active
+    cursor default
     color $color-base

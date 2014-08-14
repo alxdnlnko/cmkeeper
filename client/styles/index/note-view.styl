@@ -1,17 +1,49 @@
 .note-view {}
 
 .note-view-header
-  padding 0 16px
   line-height $note-view-header-height
   background-color $color-white
   border-bottom 1px solid rgba(0,0,0,.05)
   z-index $z-index-note-view-header
-
-.note-view-actions {}
-.note-view-action
   color $color-text-light
   font-weight 500
+  user-select none
+  cursor default
 
+
+// *****************************************
+//  Note actions
+// *****************************************
+.note-view-actions
+  display inline-block
+
+.note-view-action
+  display inline-block
+  padding 0 16px
+  text-transform uppercase
+  cursor pointer
+
+  &:hover
+    color $color-base
+
+
+// *****************************************
+//  Extra actions
+// *****************************************
+.note-view-extras {}
+
+.note-view-extra
+  padding 0 16px
+  height $note-view-header-height
+  cursor pointer
+
+  &:hover
+    color $color-base
+
+
+// *****************************************
+//  Content
+// *****************************************
 .note-view-content
   padding 16px
   background-color $color-light-bk
