@@ -190,7 +190,7 @@ body {
 }
 .l-header-actions {
   position: absolute;
-  right: 30px;
+  right: 16px;
   top: 0;
   bottom: 0;
   height: 64px;
@@ -252,19 +252,67 @@ body {
 .nav-bar-categories {
   padding: 16px 0;
 }
+.nav-bar-categories--is-loading::before {
+  content: 'loading...';
+  display: block;
+  padding-left: 16px;
+  color: #fff;
+}
 .category {
+  display: block;
   padding: 0 16px;
   height: 48px;
   line-height: 48px;
+  color: #fff;
+  text-decoration: none;
   cursor: pointer;
 }
 .category:hover {
   background-color: #3c3c3c;
 }
 .category--active {
-  color: #fff;
   font-weight: 500;
   background-color: #424242;
+}
+.category-add-block {
+  margin-top: 20px;
+}
+.category-add {
+  display: block;
+  padding: 0 16px;
+  height: 48px;
+  line-height: 48px;
+  color: #fff;
+  text-decoration: none;
+  cursor: pointer;
+}
+.category-add:hover {
+  background-color: #3c3c3c;
+}
+.category-add--editing {
+  padding: 0;
+  background-color: #3c3c3c;
+  cursor: default;
+}
+.category-add-icon {
+  margin-right: 10px;
+  text-align: center;
+}
+.category-add-save-icon {
+  height: 48px;
+  width: 40px;
+  line-height: 48px !important;
+  text-align: center !important;
+  vertical-align: middle !important;
+  cursor: pointer;
+}
+.category-add-name {
+  display: inline-block;
+  background-color: transparent;
+  border: none;
+  border-bottom: 2px solid #03a9f4;
+  color: #fff;
+  font-size: 14px;
 }
 .content {
   z-index: 1;
@@ -286,7 +334,18 @@ body {
   cursor: default;
 }
 .header-action {
-  margin-left: 24px;
+  height: 48px;
+  width: 48px;
+  line-height: 48px !important;
+  vertical-align: middle !important;
+  text-align: center !important;
+  cursor: pointer;
+}
+.header-action:hover {
+  -webkit-border-radius: 50%;
+  border-radius: 50%;
+  background-color: rgba(255,255,255,0.12);
+  cursor: pointer;
 }
 .caption {
   padding-left: 30px;
@@ -301,6 +360,7 @@ body {
   z-index: 4;
   -webkit-box-shadow: 0 1px 1px rgba(0,0,0,0.24), 0 1px 1.5px rgba(0,0,0,0.12);
   box-shadow: 0 1px 1px rgba(0,0,0,0.24), 0 1px 1.5px rgba(0,0,0,0.12);
+  background-color: #fff;
 }
 .notes-block {
   overflow: hidden;
@@ -349,6 +409,7 @@ body {
   padding-bottom: 24px;
 }
 .note {
+  display: block;
   padding: 0 16px;
   height: 48px;
   line-height: 48px;
@@ -359,6 +420,7 @@ body {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+  text-decoration: none;
 }
 .note:hover:not(.note--active) {
   cursor: pointer;
@@ -394,25 +456,27 @@ body {
 }
 .note-view-action:hover,
 .note-edit-action:hover {
-  color: #009688;
+  color: rgba(0,0,0,0.87);
 }
 .note-view-extra,
 .note-edit-extra {
   padding: 0 16px;
   height: 48px;
+  line-height: 48px !important;
+  vertical-align: middle !important;
   cursor: pointer;
 }
 .note-view-extra:hover,
 .note-edit-extra:hover {
-  color: #009688;
+  color: rgba(0,0,0,0.87);
 }
-.note-view-content,
-.note-edit-content {
+.note-view-content {
   padding: 16px;
   background-color: #fbfbfb;
   z-index: 2;
 }
 .markdown {
+  font-size: 16px;
   line-height: 20px;
 }
 .note-edit-header {
@@ -420,26 +484,29 @@ body {
 }
 .note-edit-name {
   padding: 2px 0;
-  width: 500px;
+  min-width: 300px;
+  width: 40%;
   border: 0;
   border-bottom: 2px solid #03a9f4;
   font-family: 'RobotoDraft', 'sans-serif';
-  font-size: 24px;
+  font-size: 20px;
   font-weight: 300;
   color: rgba(0,0,0,0.87);
 }
 .note-edit-actions {
   display: inline-block;
 }
-.note-edit-action--save:hover {
-  color: #03a9f4;
-}
-.note-edit-action--cancel:hover {
-  color: #e51c23;
+.note-edit-content {
+  z-index: 2;
 }
 .note-edit-editor {
+  padding: 16px;
   min-width: 100%;
-  min-height: 100%;
-  height: 100%;
+  min-height: 99%;
   border: none;
+  resize: none;
+  background-color: #fff;
+  font-family: 'RobotoDraft', 'sans-serif';
+  font-size: 16px;
+  font-weight: 300;
 }

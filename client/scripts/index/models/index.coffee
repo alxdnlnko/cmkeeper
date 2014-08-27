@@ -1,0 +1,2 @@
+require './note'
+require './category'

@@ -15,16 +15,69 @@
 .nav-bar-categories
   padding 16px 0
 
+  &--is-loading::before
+    content 'loading...'
+    display block
+    padding-left 16px
+    color $color-white
+
 .category
+  display block
   padding 0 16px
   height 48px
   line-height 48px
+  color $color-white
+  text-decoration none
   cursor pointer
 
   &:hover
     background-color lighten($color-dark-bk, 2%)
 
   &--active
-    color $color-white
     font-weight 500
     background-color lighten($color-dark-bk, 5%)
+
+
+// *****************************************
+//  New category
+// *****************************************
+.category-add-block
+  margin-top 20px
+
+.category-add
+  display block
+  padding 0 16px
+  height 48px
+  line-height 48px
+  color $color-white
+  text-decoration none
+  cursor pointer
+
+  &:hover
+    background-color lighten($color-dark-bk, 2%)
+
+  &--editing
+    padding 0
+    background-color lighten($color-dark-bk, 2%)
+    cursor default
+
+.category-add-icon
+  margin-right 10px
+  text-align center
+.category-add-text{}
+
+.category-add-save-icon
+  height 48px
+  width 40px
+  line-height 48px!important
+  text-align center!important
+  vertical-align middle!important
+  cursor pointer
+
+.category-add-name
+  display inline-block
+  background-color transparent
+  border none
+  border-bottom 2px solid $color-blue
+  color $color-white
+  font-size 14px

@@ -1,7 +1,12 @@
 require 'angular'
+require 'angular-route'
+require 'angular-resource'
 
-# define the module
-angular.module 'cmIndex', []
+angular.module 'cmIndex', [
+  'ngRoute',
+  'ngResource'
+]
 
-# import controllers
-require './controllers/pagectrl'
+require './routes'
+require './models'
+require './pagectrl'

@@ -7,11 +7,12 @@
 
 .note-edit-name
   padding 2px 0
-  width 500px
+  min-width 300px
+  width 40%
   border 0
   border-bottom 2px solid $color-blue
   font-family 'RobotoDraft', 'sans-serif'
-  font-size 24px
+  font-size 20px
   font-weight 300
   color $color-text-black
 
@@ -24,14 +25,6 @@
 
 .note-edit-action
   @extend .note-view-action
-
-  &--save
-    &:hover
-      color $color-blue
-
-  &--cancel
-    &:hover
-      color $color-red
 
 
 // *****************************************
@@ -48,10 +41,15 @@
 //  Editor
 // *****************************************
 .note-edit-content
-  @extend .note-view-content
+  z-index $z-index-note-view-content
 
 .note-edit-editor
+  padding 16px
   min-width 100%
-  min-height 100%
-  height 100%
+  min-height 99%
   border none
+  resize none
+  background-color $color-white
+  font-family 'RobotoDraft', 'sans-serif'
+  font-size 16px
+  font-weight 300
