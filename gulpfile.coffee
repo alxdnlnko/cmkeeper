@@ -5,7 +5,8 @@ streamify = require 'gulp-streamify'
 gzip = require 'gulp-gzip'
 gutil = require 'gulp-util'
 stylus = require 'gulp-stylus'
-# express = require 'gulp-express'
+express = require 'express'
+jade = require 'gulp-jade'
 
 browserify = require 'browserify'
 through = require 'through2'
@@ -19,9 +20,9 @@ livereload = require 'gulp-livereload'
 
 
 TARGETS =
-  styles: ['client/styles/index.styl']
-  scripts: ['client/scripts/**/app.coffee']
-  server: ['server/**/*.coffee']
+  styles: ['src/styles/index.styl']
+  scripts: ['src/scripts/**/app.coffee']
+  templates: ['src/views/*.jade']
 
 
 bundle = ->
@@ -74,9 +75,16 @@ gulp.task 'styles', ->
     .pipe livereload()
 
 
+gulp.task 'templates', ->
+  gulp.src TARGETS.templates
+    .pipe jade pretty: false
+    .pipe gulp.dest 'public/'
+    .pipe livereload()
+
+
 gulp.task 'express', ->
-  # express.run file: './app.js'
-  app = require './server'
+  app = express()
+  app.use '/', express.static path.resolve './public'
   app.listen 3000
   gutil.log 'Listening on 3000'
 
@@ -85,6 +93,7 @@ gulp.task 'watch', ->
   livereload.listen()
   gulp.watch ['client/scripts/**/*.coffee'], ['dev-scripts']
   gulp.watch ['client/styles/**/*.styl'], ['styles']
+  gulp.watch TARGETS.templates, ['templates']
 
 
-gulp.task 'default', ['dev-scripts', 'styles', 'express', 'watch']
+gulp.task 'default', ['dev-scripts', 'styles', 'templates', 'express', 'watch']
