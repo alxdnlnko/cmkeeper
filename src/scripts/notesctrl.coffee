@@ -1,7 +1,7 @@
 require './storage'
 
 
-PageCtrl = ($scope, $route, $routeParams, $window, Storage) ->
+PageCtrl = ($scope, $state, $stateParams, $window, Storage) ->
   $scope.storage = Storage
 
   $scope.showNonArcihved = true
@@ -44,20 +44,20 @@ PageCtrl = ($scope, $route, $routeParams, $window, Storage) ->
 
 
   # parse url, render the page
-  updatePage = () ->
-    switch $route.current.action
-      when 'home'
+  stateChanged = () ->
+    switch $state.current.name
+      when 'notes'
         break
-      when 'category'
-        Storage.selectCategory $routeParams.categoryId, (err) ->
+      when 'notes.category'
+        Storage.selectCategory $stateParams.categoryId, (err) ->
           $window.location.hash = "/" if err
-      when 'note'
-        Storage.selectCategory $routeParams.categoryId, (err) ->
+      when 'notes.note'
+        Storage.selectCategory $stateParams.categoryId, (err) ->
           if err
             $window.location.hash = "/"
             return
-          Storage.selectNote $routeParams.noteId, (err) ->
-            $window.location.hash = "/#{$routeParams.categoryId}" if err
+          Storage.selectNote $stateParams.noteId, (err) ->
+            $window.location.hash = "/#{$stateParams.categoryId}" if err
     true
 
   # events
@@ -69,16 +69,16 @@ PageCtrl = ($scope, $route, $routeParams, $window, Storage) ->
   # - load categories
   # - set the url change callback
   # - call the update page
-  Storage.loadCategories () ->
-    $scope.$on '$routeChangeSuccess', updatePage
-    updatePage()
+  # Storage.loadCategories () ->
+  $scope.$on '$stateChangeSuccess', stateChanged
+  # stateChanged()
 
 
-angular.module 'cmIndex'
-	.controller 'PageCtrl', [
+angular.module 'CMKeeper'
+	.controller 'NotesCtrl', [
     '$scope',
-    '$route',
-    '$routeParams',
+    '$state',
+    '$stateParams',
     '$window',
     'Storage',
     PageCtrl]

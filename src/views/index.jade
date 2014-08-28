@@ -1,84 +1,9 @@
 doctype
-html(ng-app="cmIndex")
+html(ng-app="CMKeeper")
   head
     link(href="https://fonts.googleapis.com/css?family=RobotoDraft:regular,bold,italic,thin,light,bolditalic,black,medium&subset=latin,cyrillic" rel="stylesheet" type="text/css")
-    link(rel="stylesheet", href="/css/index.min.css")
+    link(rel="stylesheet", href="/css/style.min.css")
     link(rel="stylesheet", href="/vendor/font-awesome/css/font-awesome.min.css")
-    script(src="/js/index.min.js")
-  body(ng-controller="PageCtrl")
-    .l-nav-bar.nav-bar
-      .l-nav-bar-header.nav-bar-header CMKeeper
-      .l-nav-bar-categories.nav-bar-categories
-        ul.categories-list
-          li(ng-repeat="category in storage.categories")
-            a.category(
-                href="#/{{ category.id }}",
-                ng-class="{'category--active': category == storage.currentCategory}") {{ category.name }}
-        .category-add-block
-          .category-add(ng-hide="storage.newCategory", ng-click="addCategory()")
-            .category-add-icon.fa.fa-plus
-            span.category-add-text Новый раздел
-          .category-add.category-add--editing(ng-show="storage.newCategory")
-            .category-add-save-icon.fa.fa-check(href="#", ng-click="saveCategory()")
-            input.category-add-name(type="text", ng-model="storage.newCategory.name")
-      .l-nav-bar-footer.nav-bar-footer
-
-    .l-content.content
-      .l-header.header
-        .caption
-          .caption-item.caption-category-name {{ storage.currentCategory.name }}
-          .caption-item.caption-arrow.fa.fa-angle-right(ng-show="!!storage.currentNote")
-          .caption-item.caption-note-name {{ storage.currentNote.name }}
-        .l-header-actions.header-actions
-          .header-action.header-action-settings.fa.fa-plus(ng-click="addNote()")
-          .header-action.header-action-settings.fa.fa-cog(ng-click="editCategory()")
-
-      .l-notes-bar.notes-bar
-        .notes-block(
-            ng-class="{'notes-block--open': showNonArcihved}")
-          .notes-block-header(ng-click="toggleNonArchived()") Заметки
-            .notes-block-toggle.fa.fa-caret-right
-          ul.notes-list
-            li(ng-repeat="note in storage.notes | filter: filterNonArchived")
-              a.note(
-                  href="#/{{ storage.currentCategory.id }}/{{ note.id }}"
-                  ng-class="{'note--active': note == storage.currentNote}")
-                .note-name {{ note.name }}
-                .note-action
-
-        .notes-block(
-            ng-class="{'notes-block--open': showArcihved}")
-          .notes-block-header(ng-click="toggleArchived()") Архив
-            .notes-block-toggle.fa.fa-caret-right
-          ul.notes-list
-            li(ng-repeat="note in storage.notes | filter: filterArchived")
-              a.note(
-                  href="#/{{ storage.currentCategory.id }}/{{ note.id }}"
-                  ng-class="{'note--active': note == storage.currentNote}")
-                .note-name {{ note.name }}
-                .note-action
-
-      .l-note-view.note-view(ng-hide="storage.editedNote")
-        .l-note-view-header.note-view-header
-          .l-note-view-actions.note-view-actions
-            .note-view-action.note-view-action--edit(
-                ng-click="startEditing(storage.currentNote)") EDIT
-
-          .l-note-view-extras.note-view-extras
-            .note-view-extra.fa.fa-ellipsis-v.fa-lg(ng-click="test()")
-        .l-note-view-content.note-view-content.markdown(ng-bind="storage.currentNote.content")
-
-      .l-note-view.note-edit(ng-show="storage.editedNote")
-        .l-note-view-header.note-edit-header
-          input.note-edit-name(type="text", ng-model="storage.editedNote.name")
-          .l-note-view-actions.note-edit-actions
-            .note-edit-action.note-edit-action--save(
-                ng-click="saveEditing()") SAVE
-            .note-edit-action.note-edit-action--cancel(
-                ng-click="cancelEditing()") CANCEL
-
-          .l-note-view-extras.note-edit-extras
-            .note-edit-extra.fa.fa-ellipsis-v.fa-lg
-
-        .l-note-view-content.note-edit-content
-          textarea.note-edit-editor(ng-model="storage.editedNote.content")
+    script(src="/js/app.min.js")
+  body
+    ui-view

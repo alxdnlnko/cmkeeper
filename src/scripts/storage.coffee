@@ -1,4 +1,4 @@
-storage = (Note, Category, $rootScope) ->
+Storage = (Note, Category, $rootScope) ->
   # Category = $resource '/api/category'
   # Note = $resource '/api/category/:categoryId/note', null,
     # update: {method: 'PUT'}
@@ -12,11 +12,20 @@ storage = (Note, Category, $rootScope) ->
   @editedNote = null
   @newCategory = null
 
-  @loadCategories = (cb) ->
-    Category.$objects.$all (err, data) =>
-      return if err
-      @categories = data
-      cb?()
+  @loadCategories = () ->
+    deferred = $q.defer()
+    console.log 'What?'
+    $timeout () ->
+      console.log 'resolved!'
+      deferred.resolve ['Category1', 'Category2']
+    , 2000
+
+    return deferred.promise
+
+    # Category.$objects.$all (err, data) =>
+    #   return if err
+    #   @categories = data
+    #   cb?()
 
   @loadNotes = (cb) ->
     return cb?(new Error 'No category') if not @currentCategory
@@ -87,5 +96,11 @@ storage = (Note, Category, $rootScope) ->
     @editedNote = null
   @
 
-angular.module 'cmIndex'
-  .service 'Storage', ['Note', 'Category', '$rootScope', storage]
+angular.module 'CMKeeper'
+  .service 'Storage', [
+    'Note',
+    'Category',
+    '$rootScope',
+    '$q',
+    '$timeout',
+    Storage]

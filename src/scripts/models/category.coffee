@@ -16,5 +16,5 @@ CategoryFabric = ($http) ->
   return Category
 
 
-angular.module 'cmIndex'
+angular.module 'CMKeeper'
   .factory 'Category', ['$http', CategoryFabric]

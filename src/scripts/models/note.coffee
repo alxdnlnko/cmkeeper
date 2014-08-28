@@ -18,5 +18,5 @@ NoteFabric = ($http) ->
   return Note
 
 
-angular.module 'cmIndex'
+angular.module 'CMKeeper'
   .factory 'Note', ['$http', NoteFabric]

@@ -21,7 +21,7 @@ livereload = require 'gulp-livereload'
 
 TARGETS =
   styles: ['src/styles/index.styl']
-  scripts: ['src/scripts/**/app.coffee']
+  scripts: ['src/scripts/app.coffee']
   templates: ['src/views/*.jade']
 
 
@@ -39,11 +39,7 @@ bundle = ->
 gulp.task 'dev-scripts', ->
   gulp.src TARGETS.scripts
     .pipe bundle()
-    .pipe rename (path) ->
-      path.basename = path.dirname + '.min'
-      path.dirname = ''
-      path.extname = '.js'
-      return path
+    .pipe rename 'app.min.js'
     .pipe gulp.dest 'public/js/'
     .pipe livereload()
 
@@ -51,11 +47,7 @@ gulp.task 'dev-scripts', ->
 gulp.task 'build-scripts', ->
   gulp.src ['client/scripts/**/app.coffee']
     .pipe bundle()
-    .pipe rename (path) ->
-      path.basename += '.min'
-      path.dirname = ''
-      path.extname = '.js'
-      return path
+    .pipe rename 'app.min.js'
     .pipe streamify uglify()
     .pipe streamify gzip append: false
     .pipe gulp.dest 'public/js/'
@@ -66,11 +58,7 @@ gulp.task 'styles', ->
     .pipe stylus
       paths: [nib.path]
       set: ['compress']
-    .pipe rename (path) ->
-      path.basename += '.min'
-      path.dirname = ''
-      path.extname = '.css'
-      return path
+    .pipe rename 'style.min.css'
     .pipe gulp.dest 'public/css/'
     .pipe livereload()
 
@@ -91,8 +79,8 @@ gulp.task 'express', ->
 
 gulp.task 'watch', ->
   livereload.listen()
-  gulp.watch ['client/scripts/**/*.coffee'], ['dev-scripts']
-  gulp.watch ['client/styles/**/*.styl'], ['styles']
+  gulp.watch ['src/scripts/**/*.coffee'], ['dev-scripts']
+  gulp.watch ['src/styles/**/*.styl'], ['styles']
   gulp.watch TARGETS.templates, ['templates']
 
 
