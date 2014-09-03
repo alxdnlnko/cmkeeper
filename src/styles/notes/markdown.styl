@@ -1,0 +1,96 @@
+$color-md-header = #718C00
+$color-md-blockquote-border = rgba(0,0,0,.12)
+$color-md-blockquote-bk = rgba(0,0,0,.05)
+$color-md-pre-bk = rgba(0,0,0,.05)
+
+.markdown
+  font-size 16px
+  line-height 1.5
+
+  > *:first-child
+    margin-top 0
+
+  h1
+    margin-top 20px
+    margin-bottom 10px
+    font-size 20px
+    font-weight 400
+    text-transform uppercase
+    color $color-md-header
+
+  h2
+    margin-top 20px
+    margin-bottom 10px
+    font-size 18px
+    font-weight 400
+    color $color-md-header
+
+  h3
+    margin-top 20px
+    margin-bottom 10px
+    font-size 18px
+    font-weight 300
+    color $color-md-header
+
+  h4
+    @extend .markdown h3
+
+  h5 {}
+  h6 {}
+  a {}
+
+  p
+    margin 20px 0
+
+  em
+    font-style italic
+
+  strong
+    font-weight 400
+
+  small
+    font-size 14px
+    font-weight 200
+
+  strike {}
+  sub {}
+  sup {}
+
+  ol
+    list-style decimal outside
+
+  ul
+    list-style disc outside
+
+  li
+    margin-left 20px
+
+    ul
+      list-style-type circle
+
+  blockquote
+    padding 5px 20px
+    border-left 8px solid $color-md-blockquote-border
+    background-color $color-md-blockquote-bk
+
+  pre
+    padding 10px
+    font-family monospace
+    font-weight 200
+    background-color $color-md-pre-bk
+
+  code {}
+
+  del {}
+  img {}
+  ins {}
+  dl {}
+  dt {}
+  dd {}
+  table {}
+  tbody {}
+  tfoot {}
+  thead {}
+  tr {}
+  th {}
+  td {}

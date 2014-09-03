@@ -10,7 +10,7 @@ reset-html5()
 *:focus
   outline 0
 
-@import 'index/variables'
+@import 'variables'
 
 // font settings
 body
@@ -19,7 +19,18 @@ body
   font-weight 300
   color $color-text-black
 
-@import 'index/layout'
+a
+  text-decoration none
+  color $color-base
+
+  &:hover
+    color darken($color-base, 30%)
+
+b
+  font-weight 500
+
+@import 'layout'
 @import 'functions'
-@import 'index/nav-bar'
-@import 'index/content'
+@import 'auth/forms'
+@import 'notes/nav-bar'
+@import 'notes/content'

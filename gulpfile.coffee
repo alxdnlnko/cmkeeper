@@ -72,6 +72,7 @@ gulp.task 'templates', ->
 
 gulp.task 'express', ->
   app = express()
+  app.use require('connect-livereload')()
   app.use '/', express.static path.resolve './public'
   app.listen 3000
   gutil.log 'Listening on 3000'

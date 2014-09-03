@@ -1,1 +1,23 @@
-p Login page!
+.l-auth-form
+  .auth-form-caption Welcome back to CMKeeper!
+  .auth-form-error(ng-show="errorMessage") {{ errorMessage }}
+  form.auth-form.login-form(action="", ng-submit="submit()")
+      .form-row
+        input.form-input(
+            type="text",
+            placeholder="Email",
+            ng-model="email",
+            ng-disabled="isLoading")
+      .form-row
+        input.form-input(
+            type="password",
+            placeholder="Password",
+            ng-model="password",
+            ng-disabled="isLoading")
+      .form-row
+        button.form-submit(ng-disabled="isLoading", ng-bind="submitText() || 'Log In'") Log In
+      .form-row
+        a.login-form-forgot(href="#") Forgot password?
+      .form-row
+        | Don't have an account?&nbsp;
+        a(href="#/signup") Sign up!

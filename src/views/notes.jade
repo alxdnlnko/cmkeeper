@@ -4,7 +4,7 @@
     ul.categories-list
       li(ng-repeat="category in storage.categories")
         a.category(
-            href="#/{{ category.id }}",
+            href="#/{{ category.objectId }}",
             ng-class="{'category--active': category == storage.currentCategory}") {{ category.name }}
     .category-add-block
       .category-add(ng-hide="storage.newCategory", ng-click="addCategory()")
@@ -33,7 +33,7 @@
       ul.notes-list
         li(ng-repeat="note in storage.notes | filter: filterNonArchived")
           a.note(
-              href="#/{{ storage.currentCategory.id }}/{{ note.id }}"
+              href="#/{{ storage.currentCategory.objectId }}/{{ note.objectId }}"
               ng-class="{'note--active': note == storage.currentNote}")
             .note-name {{ note.name }}
             .note-action
@@ -45,24 +45,24 @@
       ul.notes-list
         li(ng-repeat="note in storage.notes | filter: filterArchived")
           a.note(
-              href="#/{{ storage.currentCategory.id }}/{{ note.id }}"
+              href="#/{{ storage.currentCategory.objectId }}/{{ note.objectId }}"
               ng-class="{'note--active': note == storage.currentNote}")
             .note-name {{ note.name }}
             .note-action
 
-  .l-note-view.note-view(ng-hide="storage.editedNote")
+  .l-note-view.note-view(ng-hide="storage.currentNote.isEditing")
     .l-note-view-header.note-view-header
       .l-note-view-actions.note-view-actions
         .note-view-action.note-view-action--edit(
-            ng-click="startEditing(storage.currentNote)") EDIT
+            ng-click="startEditing()") EDIT
 
       .l-note-view-extras.note-view-extras
         .note-view-extra.fa.fa-ellipsis-v.fa-lg(ng-click="test()")
-    .l-note-view-content.note-view-content.markdown(ng-bind="storage.currentNote.content")
+    .l-note-view-content.note-view-content.markdown(marked="storage.currentNote.content")
 
-  .l-note-view.note-edit(ng-show="storage.editedNote")
+  .l-note-view.note-edit(ng-show="storage.currentNote.isEditing")
     .l-note-view-header.note-edit-header
-      input.note-edit-name(type="text", ng-model="storage.editedNote.name")
+      input.note-edit-name(type="text", ng-model="storage.currentNote.name")
       .l-note-view-actions.note-edit-actions
         .note-edit-action.note-edit-action--save(
             ng-click="saveEditing()") SAVE
@@ -73,4 +73,10 @@
         .note-edit-extra.fa.fa-ellipsis-v.fa-lg
 
     .l-note-view-content.note-edit-content
-      textarea.note-edit-editor(ng-model="storage.editedNote.content")
+      .note-edit-editor(
+        ui-ace="{useWrapMode : true, \
+          showGutter: false, \
+          mode: 'markdown', \
+          theme: 'tomorrow', \
+          onLoad: aceLoaded}"
+        ng-model="storage.currentNote.content")

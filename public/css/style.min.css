@@ -139,6 +139,16 @@ body {
   font-weight: 300;
   color: rgba(0,0,0,0.87);
 }
+a {
+  text-decoration: none;
+  color: #009688;
+}
+a:hover {
+  color: #00695f;
+}
+b {
+  font-weight: 500;
+}
 body {
   position: absolute;
   top: 0;
@@ -232,6 +242,71 @@ body {
   right: 0;
   bottom: 0;
 }
+.l-auth-form {
+  margin: 200px auto 0;
+  width: 350px;
+}
+.form-row {
+  padding: 10px;
+  text-align: center;
+}
+.form-input {
+  padding: 15px;
+  width: 100%;
+  color: rgba(0,0,0,0.54);
+  font-size: 20px;
+  -webkit-border-radius: 2px;
+  border-radius: 2px;
+  border: 1px solid rgba(0,0,0,0.12);
+  text-align: center;
+}
+.form-submit {
+  padding: 10px;
+  width: 100%;
+  height: 48px;
+  font-size: 16px;
+  text-transform: uppercase;
+  -webkit-border-radius: 2px;
+  border-radius: 2px;
+  border: none;
+  color: #fff;
+  background-color: #009688;
+  opacity: 0.8;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=80)";
+  filter: alpha(opacity=80);
+  -webkit-transition: opacity 0.5 ease-in-out;
+  -moz-transition: opacity 0.5 ease-in-out;
+  -o-transition: opacity 0.5 ease-in-out;
+  -ms-transition: opacity 0.5 ease-in-out;
+  transition: opacity 0.5 ease-in-out;
+}
+.form-submit:not([disabled]):hover {
+  cursor: pointer;
+  opacity: 1;
+  -ms-filter: none;
+  filter: none;
+}
+.form-submit[disabled] {
+  background-color: #3c5a57;
+}
+.auth-form-caption {
+  margin-bottom: 10px;
+  text-align: center;
+  font-size: 20px;
+  color: rgba(0,0,0,0.54);
+}
+.auth-form-error {
+  padding: 10px 0;
+  color: #e51c23;
+  text-align: center;
+  font-weight: 400;
+}
+.signup-form .form-submit {
+  background-color: #e51c23;
+}
+.signup-form .form-submit[disabled] {
+  background-color: #a65b5d;
+}
 .nav-bar {
   z-index: 0;
   color: #fff;
@@ -268,9 +343,11 @@ body {
   cursor: pointer;
 }
 .category:hover {
+  color: #fff;
   background-color: #3c3c3c;
 }
 .category--active {
+  color: #fff;
   font-weight: 500;
   background-color: #424242;
 }
@@ -424,6 +501,7 @@ body {
 }
 .note:hover:not(.note--active) {
   cursor: pointer;
+  color: rgba(0,0,0,0.76);
   background-color: #f2f2f2;
 }
 .note--active {
@@ -474,10 +552,73 @@ body {
   padding: 16px;
   background-color: #fbfbfb;
   z-index: 2;
+  overflow-y: scroll;
 }
 .markdown {
   font-size: 16px;
-  line-height: 20px;
+  line-height: 1.5;
+}
+.markdown > *:first-child {
+  margin-top: 0;
+}
+.markdown h1 {
+  margin-top: 20px;
+  margin-bottom: 10px;
+  font-size: 20px;
+  font-weight: 400;
+  text-transform: uppercase;
+  color: #718c00;
+}
+.markdown h2 {
+  margin-top: 20px;
+  margin-bottom: 10px;
+  font-size: 18px;
+  font-weight: 400;
+  color: #718c00;
+}
+.markdown h3,
+.markdown h4 {
+  margin-top: 20px;
+  margin-bottom: 10px;
+  font-size: 18px;
+  font-weight: 300;
+  color: #718c00;
+}
+.markdown p {
+  margin: 20px 0;
+}
+.markdown em {
+  font-style: italic;
+}
+.markdown strong {
+  font-weight: 400;
+}
+.markdown small {
+  font-size: 14px;
+  font-weight: 200;
+}
+.markdown ol {
+  list-style: decimal outside;
+}
+.markdown ul {
+  list-style: disc outside;
+}
+.markdown li {
+  margin-left: 20px;
+}
+.markdown li ul {
+  list-style-type: circle;
+}
+.markdown blockquote {
+  padding: 5px 20px;
+  border-left: 8px solid rgba(0,0,0,0.12);
+  background-color: rgba(0,0,0,0.05);
+}
+.markdown pre {
+  padding: 10px;
+  font-family: monospace;
+  font-weight: 200;
+  background-color: rgba(0,0,0,0.05);
 }
 .note-edit-header {
   padding: 0 16px;
@@ -497,6 +638,7 @@ body {
   display: inline-block;
 }
 .note-edit-content {
+  padding: 10px;
   z-index: 2;
 }
 .note-edit-editor {
