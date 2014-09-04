@@ -49,7 +49,7 @@ gulp.task 'build-scripts', ->
     .pipe bundle()
     .pipe rename 'app.min.js'
     .pipe streamify uglify()
-    .pipe streamify gzip append: false
+    # .pipe streamify gzip append: false
     .pipe gulp.dest 'public/js/'
 
 
@@ -78,15 +78,15 @@ gulp.task 'express', ->
   gutil.log 'Listening on 3000'
 
 
-gulp.task 'express-gzip', ->
-  app = express()
-  app.use require('connect-livereload')()
-  app.get '*.min.js', (req, res, next) ->
-    res.set 'Content-Encoding', 'gzip'
-    next()
-  app.use '/', express.static path.resolve './public'
-  app.listen 3000
-  gutil.log 'Listening on 3000'
+# gulp.task 'express-gzip', ->
+#   app = express()
+#   app.use require('connect-livereload')()
+#   app.get '*.min.js', (req, res, next) ->
+#     res.set 'Content-Encoding', 'gzip'
+#     next()
+#   app.use '/', express.static path.resolve './public'
+#   app.listen 3000
+#   gutil.log 'Listening on 3000'
 
 
 gulp.task 'watch', ->
