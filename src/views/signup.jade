@@ -1,23 +1,24 @@
-.l-auth-form
-  .auth-form-caption Create your CMKepeer account!
-  .auth-form-error(ng-show="errorMessage") {{ errorMessage }}
-  form.auth-form.signup-form(action="", ng-submit="submit()")
-      .form-row
-        input.form-input(
-            type="text",
-            placeholder="Email",
-            ng-model="email",
-            ng-disabled="isLoading")
-      .form-row
-        input.form-input(
-            type="password",
-            placeholder="Password",
-            ng-model="password",
-            ng-disabled="isLoading")
-      .form-row
-        button.form-submit(
-            ng-disabled="isLoading",
-            ng-bind="submitText() || 'Sign Up'") Sign Up
-      .form-row
-        | Already have an account?&nbsp;
-        a(href="#/login") Log in
+.l-auth-form-container.auth-form-container
+  .l-auth-form
+    .auth-form-caption Create your CMKepeer account!
+    .auth-form-error(ng-show="errorMessage") {{ errorMessage }}
+    form.auth-form.signup-form(action="", ng-submit="submit()")
+        .form-row
+          input.form-input(
+              type="text",
+              placeholder="Email",
+              ng-model="email",
+              ng-disabled="isLoading")
+        .form-row
+          input.form-input(
+              type="password",
+              placeholder="Password",
+              ng-model="password",
+              ng-disabled="isLoading")
+        .form-row
+          button.form-submit(
+              ng-disabled="isLoading",
+              ng-bind="submitText() || 'Sign Up'") Sign Up
+        .form-row
+          | Already have an account?&nbsp;
+          a(href="#/login") Log in

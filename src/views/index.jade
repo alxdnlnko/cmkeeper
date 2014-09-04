@@ -5,5 +5,9 @@ html(ng-app="CMKeeper")
     link(rel="stylesheet", href="./css/style.min.css")
     link(rel="stylesheet", href="./vendor/font-awesome/css/font-awesome.min.css")
     script(src="./js/app.min.js")
+
+    title(ng-bind="title || 'CMKeeper'") CMkeeper
   body
     ui-view
+    .l-app-preloader.app-preloader
+

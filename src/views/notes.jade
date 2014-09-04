@@ -1,82 +1,88 @@
-.l-nav-bar.nav-bar
-  .l-nav-bar-header.nav-bar-header CMKeeper
-  .l-nav-bar-categories.nav-bar-categories
-    ul.categories-list
-      li(ng-repeat="category in storage.categories")
-        a.category(
-            href="#/{{ category.objectId }}",
-            ng-class="{'category--active': category == storage.currentCategory}") {{ category.name }}
-    .category-add-block
-      .category-add(ng-hide="storage.newCategory", ng-click="addCategory()")
-        .category-add-icon.fa.fa-plus
-        span.category-add-text Новый раздел
-      .category-add.category-add--editing(ng-show="storage.newCategory")
-        .category-add-save-icon.fa.fa-check(href="#", ng-click="saveCategory()")
-        input.category-add-name(type="text", ng-model="storage.newCategory.name")
-  .l-nav-bar-footer.nav-bar-footer
+.l-notes-page-container.notes-page-container
+  .l-nav-bar.nav-bar
+    .l-nav-bar-header.nav-bar-header CMKeeper
+    .l-nav-bar-categories.nav-bar-categories
+      ul.categories-list
+        li(ng-repeat="category in storage.categories")
+          a.category(
+              href="#/{{ category.objectId }}",
+              ng-class="{'category--active': category == storage.currentCategory}") {{ category.name }}
+      .category-add-block
+        .category-add(ng-hide="storage.newCategory", ng-click="addCategory()")
+          .category-add-icon.fa.fa-plus
+          span.category-add-text New category
+        .category-add.category-add--editing(ng-show="storage.newCategory")
+          .category-add-save-icon.fa.fa-check(href="#", ng-click="saveCategory()")
+          input.category-add-name(type="text", ng-model="storage.newCategory.name")
+    .l-nav-bar-footer.nav-bar-footer
+      | © Alex Danilenko 2014<br><br>
+      | Powered by<br>
+      | AngularJS, BackendLess, ACE
 
-.l-content.content
-  .l-header.header
-    .caption
-      .caption-item.caption-category-name {{ storage.currentCategory.name }}
-      .caption-item.caption-arrow.fa.fa-angle-right(ng-show="!!storage.currentNote")
-      .caption-item.caption-note-name {{ storage.currentNote.name }}
-    .l-header-actions.header-actions
-      .header-action.header-action-settings.fa.fa-plus(ng-click="addNote()")
-      .header-action.header-action-settings.fa.fa-cog(ng-click="editCategory()")
+  .l-content.content
+    .l-header.header
+      .caption
+        .caption-item.caption-category-name {{ storage.currentCategory.name }}
+        .caption-item.caption-notes-preloader.fa.fa-refresh.fa-fw.fa-spin(ng-show="storage.isLoadingNotes")
+        .caption-item.caption-arrow.fa.fa-angle-right(ng-show="!!storage.currentNote")
+        .caption-item.caption-note-name {{ storage.currentNote.name }}
+      .l-header-actions.header-actions
+        .header-action.header-action-settings.fa.fa-plus(ng-click="addNote()")
+        .header-action.header-action-settings.fa.fa-cog(ng-click="editCategory()")
 
-  .l-notes-bar.notes-bar
-    .notes-block(
-        ng-class="{'notes-block--open': showNonArcihved}")
-      .notes-block-header(ng-click="toggleNonArchived()") Заметки
-        .notes-block-toggle.fa.fa-caret-right
-      ul.notes-list
-        li(ng-repeat="note in storage.notes | filter: filterNonArchived")
-          a.note(
-              href="#/{{ storage.currentCategory.objectId }}/{{ note.objectId }}"
-              ng-class="{'note--active': note == storage.currentNote}")
-            .note-name {{ note.name }}
-            .note-action
+    .l-notes-bar.notes-bar
+      .notes-block(
+          ng-class="{'notes-block--open': showNonArcihved}")
+        .notes-block-header(ng-click="toggleNonArchived()") Notes
+          .notes-block-toggle.fa.fa-caret-right
+        ul.notes-list
+          li(ng-repeat="note in storage.notes | filter: filterNonArchived")
+            a.note(
+                href="#/{{ storage.currentCategory.objectId }}/{{ note.objectId }}"
+                ng-class="{'note--active': note == storage.currentNote}")
+              .note-name {{ note.name }}
+              .note-action
 
-    .notes-block(
-        ng-class="{'notes-block--open': showArcihved}")
-      .notes-block-header(ng-click="toggleArchived()") Архив
-        .notes-block-toggle.fa.fa-caret-right
-      ul.notes-list
-        li(ng-repeat="note in storage.notes | filter: filterArchived")
-          a.note(
-              href="#/{{ storage.currentCategory.objectId }}/{{ note.objectId }}"
-              ng-class="{'note--active': note == storage.currentNote}")
-            .note-name {{ note.name }}
-            .note-action
+      .notes-block(
+          ng-class="{'notes-block--open': showArcihved}")
+        .notes-block-header(ng-click="toggleArchived()") Archive
+          .notes-block-toggle.fa.fa-caret-right
+        ul.notes-list
+          li(ng-repeat="note in storage.notes | filter: filterArchived")
+            a.note(
+                href="#/{{ storage.currentCategory.objectId }}/{{ note.objectId }}"
+                ng-class="{'note--active': note == storage.currentNote}")
+              .note-name {{ note.name }}
+              .note-action
 
-  .l-note-view.note-view(ng-hide="storage.currentNote.isEditing")
-    .l-note-view-header.note-view-header
-      .l-note-view-actions.note-view-actions
-        .note-view-action.note-view-action--edit(
-            ng-click="startEditing()") EDIT
+    .l-note-view
+      .note-view(ng-show="storage.currentNote && !storage.currentNote.isEditing")
+        .l-note-view-header.note-view-header
+          .l-note-view-actions.note-view-actions
+            .note-view-action.note-view-action--edit(
+                ng-click="startEditing()") EDIT
 
-      .l-note-view-extras.note-view-extras
-        .note-view-extra.fa.fa-ellipsis-v.fa-lg(ng-click="test()")
-    .l-note-view-content.note-view-content.markdown(marked="storage.currentNote.content")
+          .l-note-view-extras.note-view-extras
+            .note-view-extra.fa.fa-ellipsis-v.fa-lg(ng-click="test()")
+        .l-note-view-content.note-view-content.markdown(marked="storage.currentNote.content")
 
-  .l-note-view.note-edit(ng-show="storage.currentNote.isEditing")
-    .l-note-view-header.note-edit-header
-      input.note-edit-name(type="text", ng-model="storage.currentNote.name")
-      .l-note-view-actions.note-edit-actions
-        .note-edit-action.note-edit-action--save(
-            ng-click="saveEditing()") SAVE
-        .note-edit-action.note-edit-action--cancel(
-            ng-click="cancelEditing()") CANCEL
+      .note-edit(ng-show="storage.currentNote && storage.currentNote.isEditing")
+        .l-note-view-header.note-edit-header
+          input.note-edit-name(type="text", ng-model="storage.currentNote.name")
+          .l-note-view-actions.note-edit-actions
+            .note-edit-action.note-edit-action--save(
+                ng-click="saveEditing()") SAVE
+            .note-edit-action.note-edit-action--cancel(
+                ng-click="cancelEditing()") CANCEL
 
-      .l-note-view-extras.note-edit-extras
-        .note-edit-extra.fa.fa-ellipsis-v.fa-lg
+        .l-note-view-extras.note-edit-extras
+          .note-edit-extra.fa.fa-ellipsis-v.fa-lg
 
-    .l-note-view-content.note-edit-content
-      .note-edit-editor(
-        ui-ace="{useWrapMode : true, \
-          showGutter: false, \
-          mode: 'markdown', \
-          theme: 'tomorrow', \
-          onLoad: aceLoaded}"
-        ng-model="storage.currentNote.content")
+        .l-note-view-content.note-edit-content
+          .note-edit-editor(
+            ui-ace="{useWrapMode : true, \
+              showGutter: false, \
+              mode: 'markdown', \
+              theme: 'tomorrow', \
+              onLoad: aceLoaded}"
+            ng-model="storage.currentNote.content")

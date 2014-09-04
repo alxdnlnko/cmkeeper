@@ -26,11 +26,22 @@ configureRoutes = ($stateProvider, $urlRouterProvider) ->
               deferred.resolve()
             return deferred.promise
           ]
+        title: [
+          '$rootScope',
+          ($rootScope) ->
+            $rootScope.title = 'CMKeeper - Login'
+          ]
 
     .state 'signup',
       url: '/signup'
       templateUrl: 'signup.html'
       controller: 'SignupCtrl'
+      resolve:
+        title: [
+          '$rootScope',
+          ($rootScope) ->
+            $rootScope.title = 'CMKeeper - Signup'
+          ]
 
     .state 'notes',
       url: '/'
@@ -57,6 +68,11 @@ configureRoutes = ($stateProvider, $urlRouterProvider) ->
           'resolveAuth',
           (Storage) ->
             Storage.loadCategories()
+          ]
+        title: [
+          '$rootScope',
+          ($rootScope) ->
+            $rootScope.title = 'CMKeeper'
           ]
 
     .state 'notes.category',

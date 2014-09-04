@@ -6,7 +6,6 @@ NotesCtrl = ($scope, $state, $stateParams, $window, Storage) ->
 
   $scope.categoriesOrder = 'created'
 
-
   $scope.aceLoaded = (ace) ->
     # console.log 'loaded:', ace
     ace.setFontSize 16
@@ -30,9 +29,9 @@ NotesCtrl = ($scope, $state, $stateParams, $window, Storage) ->
     Storage.cancelEditing()
 
   $scope.addNote = () ->
-    $state.go 'notes.category',
-      categoryId: Storage.currentCategory.objectId
-    Storage.addNote()
+    $state.transitionTo 'notes.category', categoryId: Storage.currentCategory.objectId
+      .then () ->
+        Storage.addNote()
 
   $scope.addCategory = () ->
     Storage.addCategory()

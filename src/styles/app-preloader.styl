@@ -1,0 +1,22 @@
+.app-preloader
+  background-color #fff
+
+.app-preloader::after {
+  display block
+  content ""
+  width 40px
+  height 40px
+  margin 400px auto
+  background-color $color-base
+  border-radius 100%
+  animation scaleout .8s infinite ease-in-out
+}
+
+@keyframes scaleout {
+  0% {
+    transform scale(0.0)
+  } 100% {
+    transform scale(1.0)
+    opacity 0
+  }
+}

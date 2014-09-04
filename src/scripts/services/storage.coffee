@@ -7,6 +7,8 @@ Storage = (Note, Category, Errors, $rootScope, $q) ->
 
   @newCategory = null
 
+  @isLoadingNotes = false
+
   @loadCategories = () ->
     deferred = $q.defer()
     Category.objects.all()
@@ -34,13 +36,16 @@ Storage = (Note, Category, Errors, $rootScope, $q) ->
 
   @loadNotes = (categoryId) ->
     deferred = $q.defer()
+    @isLoadingNotes = true
     @notes = []
     Note.objects.all categoryId
       .then(
         (data) =>
+          @isLoadingNotes = false
           @notes = data
           deferred.resolve data
         (err) ->
+          @isLoadingNotes = false
           deferred.reject err
       )
     return deferred.promise
@@ -110,6 +115,7 @@ Storage = (Note, Category, Errors, $rootScope, $q) ->
   @cancelEditing = () ->
     return if not @currentNote
     @currentNote.cancelEditing()
+    @currentNote = null
   @
 
 angular.module 'CMKeeper'
