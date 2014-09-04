@@ -1,10 +1,10 @@
-Backend = ($http, $q) ->
+Backend = (Cookies, $http, $q) ->
   APP_ID = 'E6F0499F-1DBA-2433-FF0B-5B5B86D38700'
   SECRET = '85FE93BF-B03A-9159-FFE0-180BD9BA5F00'
   VER = 'v1'
   APP_TYPE = 'REST'
 
-  @userToken = null
+  @userToken = Cookies.get 'user-token'
 
   @isAuthorized = () ->
     return @userToken?
@@ -45,6 +45,7 @@ Backend = ($http, $q) ->
     @makeRequest 'users/login', login: email, password: password
       .success (data, status) =>
         @userToken = data['user-token']
+        Cookies.set 'user-token', @userToken, 30
         deferred.resolve data
       .error (data, status) =>
         deferred.reject data
@@ -54,6 +55,7 @@ Backend = ($http, $q) ->
 
 angular.module 'CMKeeper'
   .service 'Backend', [
+    'Cookies',
     '$http',
     '$q',
     Backend]

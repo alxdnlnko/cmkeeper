@@ -1,4 +1,4 @@
-PageCtrl = ($scope, $state, $stateParams, $window, Storage) ->
+NotesCtrl = ($scope, $state, $stateParams, $window, Storage) ->
   $scope.storage = Storage
 
   $scope.showNonArcihved = true
@@ -89,4 +89,4 @@ angular.module 'CMKeeper'
     '$stateParams',
     '$window',
     'Storage',
-    PageCtrl]
+    NotesCtrl]
