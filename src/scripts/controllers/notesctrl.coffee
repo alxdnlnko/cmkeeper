@@ -8,7 +8,7 @@ NotesCtrl = ($scope, $state, $stateParams, $window, Storage) ->
 
 
   $scope.aceLoaded = (ace) ->
-    console.log 'loaded:', ace
+    # console.log 'loaded:', ace
     ace.setFontSize 16
     ace.setHighlightActiveLine false
     ace.setShowPrintMargin false
@@ -54,6 +54,8 @@ NotesCtrl = ($scope, $state, $stateParams, $window, Storage) ->
     switch $state.current.name
       when 'notes'
         Storage.selectCategory null
+      when 'notes.category'
+        Storage.selectNote null
         # break
       # when 'notes.category'
         # Storage.selectCategory $stateParams.categoryId, (err) ->

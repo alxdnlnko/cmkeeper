@@ -45,7 +45,7 @@ gulp.task 'dev-scripts', ->
 
 
 gulp.task 'build-scripts', ->
-  gulp.src ['client/scripts/**/app.coffee']
+  gulp.src TARGETS.scripts
     .pipe bundle()
     .pipe rename 'app.min.js'
     .pipe streamify uglify()
@@ -73,6 +73,17 @@ gulp.task 'templates', ->
 gulp.task 'express', ->
   app = express()
   app.use require('connect-livereload')()
+  app.use '/', express.static path.resolve './public'
+  app.listen 3000
+  gutil.log 'Listening on 3000'
+
+
+gulp.task 'express-gzip', ->
+  app = express()
+  app.use require('connect-livereload')()
+  app.get '*.min.js', (req, res, next) ->
+    res.set 'Content-Encoding', 'gzip'
+    next()
   app.use '/', express.static path.resolve './public'
   app.listen 3000
   gutil.log 'Listening on 3000'
