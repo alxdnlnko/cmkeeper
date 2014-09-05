@@ -552,6 +552,11 @@ body {
   vertical-align: middle !important;
   text-align: center !important;
   cursor: pointer;
+  -webkit-transition: background-color ease-in-out 0.1s;
+  -moz-transition: background-color ease-in-out 0.1s;
+  -o-transition: background-color ease-in-out 0.1s;
+  -ms-transition: background-color ease-in-out 0.1s;
+  transition: background-color ease-in-out 0.1s;
 }
 .header-action:hover {
   background-color: rgba(255,255,255,0.12);
@@ -710,6 +715,11 @@ body {
   font-size: 16px;
   font-weight: 300;
   color: rgba(0,0,0,0.87);
+  -webkit-transition: background-color ease-in-out 0.1s;
+  -moz-transition: background-color ease-in-out 0.1s;
+  -o-transition: background-color ease-in-out 0.1s;
+  -ms-transition: background-color ease-in-out 0.1s;
+  transition: background-color ease-in-out 0.1s;
 }
 .note-menu-item:hover {
   cursor: pointer;
