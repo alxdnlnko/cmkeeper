@@ -8,12 +8,16 @@
               href="#/{{ category.objectId }}",
               ng-class="{'category--active': category == storage.currentCategory}") {{ category.name }}
       .category-add-block
-        .category-add(ng-hide="storage.newCategory", ng-click="addCategory()")
+        .category-add(ng-hide="storage.newCategory" ng-click="addCategory()")
           .category-add-icon.fa.fa-plus
           span.category-add-text New category
         .category-add.category-add--editing(ng-show="storage.newCategory")
-          .category-add-save-icon.fa.fa-check(href="#", ng-click="saveCategory()")
-          input.category-add-name(type="text", ng-model="storage.newCategory.name")
+          .category-add-save-icon.fa.fa-check(href="#" ng-click="saveCategory()")
+          input.category-add-name(
+              type="text"
+              ng-model="storage.newCategory.name"
+              cm-focus="storage.newCategory"
+              ng-keyup="newCategoryInputKey($event)")
     .l-nav-bar-footer.nav-bar-footer
       | © Alex Danilenko 2014<br><br>
       | Powered by<br>
@@ -73,7 +77,11 @@
 
       .note-edit(ng-show="storage.currentNote && storage.currentNote.isEditing")
         .l-note-view-header.note-edit-header
-          input.note-edit-name(type="text", ng-model="storage.currentNote.editedName")
+          input.note-edit-name(
+              type="text"
+              ng-model="storage.currentNote.editedName"
+              cm-focus="storage.currentNote.isEditing"
+              ng-keyup="editNoteInputKey($event)")
           .l-note-view-actions.note-edit-actions
             .note-edit-action.note-edit-action--save(
                 ng-click="saveEditing()") SAVE

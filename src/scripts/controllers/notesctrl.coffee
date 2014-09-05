@@ -16,10 +16,30 @@ NotesCtrl = ($scope, $state, $stateParams, $window, $rootScope, Storage) ->
     $scope.isNoteMenuVisible = false
 
   $scope.aceLoaded = (ace) ->
-    # console.log 'loaded:', ace
-    # ace.setFontSize 16
     ace.setHighlightActiveLine false
     ace.setShowPrintMargin false
+    ace.setWrapBehavioursEnabled true
+    # ace.commands.addCommand
+    #   name: 'toggleVimMode'
+    #   bindKey: win: 'Ctrl-Shift-V', mac: 'Command-Option-V'
+    #   exec: (editor) ->
+    #     editor.setKeyboardHandler 'vim'
+    ace.commands.addCommand
+      name: 'removeLine'
+      bindKey: win: 'Ctrl-X'
+      exec: (editor) ->
+        editor.removeLines()
+    ace.commands.addCommand
+      name: 'saveNote'
+      bindKey: win: 'Ctrl-S'
+      exec: (editor) ->
+        $scope.saveEditing()
+    ace.commands.addCommand
+      name: 'cancelEditing'
+      bindKey: win: 'Escape'
+      exec: (editor) ->
+        $scope.$apply () ->
+          $scope.cancelEditing()
 
   # UI handlers
   $scope.toggleNonArchived = () ->
@@ -47,6 +67,7 @@ NotesCtrl = ($scope, $state, $stateParams, $window, $rootScope, Storage) ->
   $scope.cancelEditing = () ->
     Storage.cancelEditing()
 
+
   $scope.addNote = () ->
     $state.transitionTo 'notes.category', categoryId: Storage.currentCategory.objectId
       .then () ->
@@ -58,6 +79,9 @@ NotesCtrl = ($scope, $state, $stateParams, $window, $rootScope, Storage) ->
   $scope.saveCategory = () ->
     Storage.saveNewCategory()
 
+  $scope.cancelNewCategory = () ->
+    Storage.cancelNewCategory()
+
 
   # filters
   $scope.filterNonArchived = (note) ->
@@ -67,6 +91,22 @@ NotesCtrl = ($scope, $state, $stateParams, $window, $rootScope, Storage) ->
     return note.archived
 
 
+  # keyEvents
+  $scope.newCategoryInputKey = (ev) ->
+    switch ev.keyCode
+      when 13
+        $scope.saveCategory()
+      when 27
+        $scope.cancelNewCategory()
+
+  $scope.editNoteInputKey = (ev) ->
+    switch ev.keyCode
+      when 13
+        $scope.saveEditing()
+      when 27
+        $scope.cancelEditing()
+
+
   # parse url, render the page
   stateChanged = () ->
     switch $state.current.name
@@ -74,6 +114,11 @@ NotesCtrl = ($scope, $state, $stateParams, $window, $rootScope, Storage) ->
         Storage.selectCategory null
       when 'notes.category'
         Storage.selectNote null
+        if Storage.notes.length
+          $state.go 'notes.category.note',
+            categoryId: Storage.currentCategory.objectId
+            noteId: Storage.notes[0]?.objectId
+
         # break
       # when 'notes.category'
         # Storage.selectCategory $stateParams.categoryId, (err) ->

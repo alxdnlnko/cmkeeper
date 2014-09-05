@@ -74,6 +74,9 @@ Storage = (Note, Category, Errors, $rootScope, $q) ->
     category.save()
     @newCategory = null
 
+  @cancelNewCategory = () ->
+    @newCategory = null
+
   @archiveNote = () ->
     return if not @currentNote
     @currentNote.archived = true
