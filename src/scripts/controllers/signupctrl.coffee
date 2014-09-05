@@ -1,4 +1,5 @@
-SignupCtrl = ($scope, Backend, $state) ->
+SignupCtrl = ($scope, $rootScope, Backend, $state) ->
+  $rootScope.hideGlobalPreloader = true
   $scope.isLoading = false
 
   $scope.submit = () ->
@@ -20,6 +21,7 @@ SignupCtrl = ($scope, Backend, $state) ->
 angular.module 'CMKeeper'
   .controller 'SignupCtrl', [
     '$scope',
+    '$rootScope',
     'Backend',
     '$state',
     SignupCtrl]

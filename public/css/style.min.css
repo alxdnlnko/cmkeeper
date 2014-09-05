@@ -250,6 +250,13 @@ body {
   height: 48px;
   width: auto;
 }
+.l-note-menu {
+  position: absolute;
+  top: 0px;
+  right: 5px;
+  paddng: 8px 0;
+  z-index: 100;
+}
 .l-note-view-content {
   position: absolute;
   top: 48px;
@@ -539,16 +546,14 @@ body {
   cursor: default;
 }
 .header-action {
-  height: 48px;
+  height: 64px;
   width: 48px;
-  line-height: 48px !important;
+  line-height: 64px !important;
   vertical-align: middle !important;
   text-align: center !important;
   cursor: pointer;
 }
 .header-action:hover {
-  -webkit-border-radius: 50%;
-  border-radius: 50%;
   background-color: rgba(255,255,255,0.12);
   cursor: pointer;
 }
@@ -682,6 +687,29 @@ body {
 .note-edit-extra:hover {
   color: rgba(0,0,0,0.87);
 }
+.note-menu {
+  display: block;
+  padding: 8px 0;
+  list-style: none;
+  background-color: #fff;
+  -webkit-border-radius: 2px;
+  border-radius: 2px;
+  -webkit-box-shadow: 0 1px 1px rgba(0,0,0,0.24), 0 1px 1.5px rgba(0,0,0,0.12);
+  box-shadow: 0 1px 1px rgba(0,0,0,0.24), 0 1px 1.5px rgba(0,0,0,0.12);
+}
+.note-menu-item {
+  padding-left: 16px;
+  padding-bottom: 20px;
+  height: 48px;
+  min-width: 168px;
+  font-size: 16px;
+  font-weight: 300;
+  color: rgba(0,0,0,0.87);
+}
+.note-menu-item:hover {
+  cursor: pointer;
+  background-color: #f2f2f2;
+}
 .note-view-content {
   padding: 16px;
   background-color: #fbfbfb;
@@ -697,7 +725,7 @@ body {
 }
 .markdown h1 {
   margin-top: 20px;
-  margin-bottom: 10px;
+  margin-bottom: 16px;
   font-size: 20px;
   font-weight: 400;
   text-transform: uppercase;
@@ -705,7 +733,7 @@ body {
 }
 .markdown h2 {
   margin-top: 20px;
-  margin-bottom: 10px;
+  margin-bottom: 16px;
   font-size: 18px;
   font-weight: 400;
   color: #718c00;
@@ -713,7 +741,7 @@ body {
 .markdown h3,
 .markdown h4 {
   margin-top: 20px;
-  margin-bottom: 10px;
+  margin-bottom: 16px;
   font-size: 18px;
   font-weight: 300;
   color: #718c00;
@@ -772,7 +800,7 @@ body {
   display: inline-block;
 }
 .note-edit-content {
-  padding: 10px;
+  padding: 16px;
   z-index: 2;
 }
 .note-edit-editor {
@@ -785,4 +813,9 @@ body {
   font-family: 'RobotoDraft', 'sans-serif';
   font-size: 16px;
   font-weight: 300;
+}
+.ace_editor {
+  font-size: 18px !important;
+  font-weight: 200 !important;
+  line-height: 20px !important;
 }

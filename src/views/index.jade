@@ -9,5 +9,5 @@ html(ng-app="CMKeeper")
     title(ng-bind="title || 'CMKeeper'") CMkeeper
   body
     ui-view
-    .l-app-preloader.app-preloader
+    .l-app-preloader.app-preloader(ng-hide="hideGlobalPreloader")
 

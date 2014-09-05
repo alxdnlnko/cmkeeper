@@ -17,7 +17,7 @@
     .l-nav-bar-footer.nav-bar-footer
       | © Alex Danilenko 2014<br><br>
       | Powered by<br>
-      | AngularJS, BackendLess, ACE
+      | AngularJS, BackendLess, Ace
 
   .l-content.content
     .l-header.header
@@ -63,7 +63,11 @@
                 ng-click="startEditing()") EDIT
 
           .l-note-view-extras.note-view-extras
-            .note-view-extra.fa.fa-ellipsis-v.fa-lg(ng-click="test()")
+            .note-view-extra.note-menu-toggle.fa.fa-ellipsis-v.fa-lg(ng-click="showNoteMenu()")
+            .l-note-menu.note-menu(cm-menu ng-show="isNoteMenuVisible" on-close="hideNoteMenu()")
+              .note-menu-item(ng-click="startEditing()") Edit
+              .note-menu-item(ng-show="!storage.currentNote.archived" ng-click="archiveNote()") Archive
+              .note-menu-item(ng-show="storage.currentNote.archived" ng-click="unarchiveNote()") Unarchive
         .l-note-view-content.note-view-content.markdown(marked="storage.currentNote.content")
 
       .note-edit(ng-show="storage.currentNote && storage.currentNote.isEditing")

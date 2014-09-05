@@ -41,7 +41,7 @@ NoteFabric = ($q, Backend, Errors) ->
       method = 'POST'
 
     Backend.makeRequest(url,
-        name: @name, content: @content, categoryId: @categoryId
+        name: @name, content: @content, categoryId: @categoryId, archived: @archived
         method
     ).success (data, status) =>
       @[key] = val for key, val of data when key of @

@@ -1,14 +1,23 @@
-NotesCtrl = ($scope, $state, $stateParams, $window, Storage) ->
+NotesCtrl = ($scope, $state, $stateParams, $window, $rootScope, Storage) ->
+  # hack to hide preloader after all reloves
+  $rootScope.hideGlobalPreloader = true
+
   $scope.storage = Storage
 
   $scope.showNonArcihved = true
   $scope.showArcihved = true
-
   $scope.categoriesOrder = 'created'
+  $scope.isNoteMenuVisible = false
+
+  $scope.showNoteMenu = () ->
+    $scope.isNoteMenuVisible = true
+
+  $scope.hideNoteMenu = () ->
+    $scope.isNoteMenuVisible = false
 
   $scope.aceLoaded = (ace) ->
     # console.log 'loaded:', ace
-    ace.setFontSize 16
+    # ace.setFontSize 16
     ace.setHighlightActiveLine false
     ace.setShowPrintMargin false
 
@@ -18,6 +27,12 @@ NotesCtrl = ($scope, $state, $stateParams, $window, Storage) ->
 
   $scope.toggleArchived = () ->
     $scope.showArcihved = not $scope.showArcihved
+
+  $scope.archiveNote = () ->
+    Storage.archiveNote()
+
+  $scope.unarchiveNote = () ->
+    Storage.unarchiveNote()
 
   $scope.startEditing = () ->
     Storage.startEditing()
@@ -89,5 +104,6 @@ angular.module 'CMKeeper'
     '$state',
     '$stateParams',
     '$window',
+    '$rootScope',
     'Storage',
     NotesCtrl]

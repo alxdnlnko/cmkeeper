@@ -74,6 +74,16 @@ Storage = (Note, Category, Errors, $rootScope, $q) ->
     category.save()
     @newCategory = null
 
+  @archiveNote = () ->
+    return if not @currentNote
+    @currentNote.archived = true
+    @currentNote.save()
+
+  @unarchiveNote = () ->
+    return if not @currentNote
+    @currentNote.archived = false
+    @currentNote.save()
+
   @startEditing = () ->
     return if not @currentNote
     @currentNote.startEditing()
@@ -94,28 +104,11 @@ Storage = (Note, Category, Errors, $rootScope, $q) ->
         .then () ->
           $rootScope.$broadcast 'newNoteSaved', note
 
-    # if not @currentNote  # adding a new note
-    #   @currentNote = new Category(@editedNote)
-    #   @notes.unshift @currentNote
-    #   do (note = @currentNote) ->
-    #     note.$save().then (data) ->
-    #       console.log "#{note.id} added!"
-    #       $rootScope.$broadcast 'newNoteSaved', note
-    #     , (data) ->
-    #       console.log "Can't save #{note.id} note"
-    # else
-    #   @currentNote[key] = val for key, val of @editedNote
-    #   do (note = @currentNote) ->
-    #     note.$update().then (data) ->
-    #       console.log "#{note.id} saved!"
-    #     , (data) ->
-    #       console.log "Can't save #{note.id} note"
-    # @editedNote = null
-
   @cancelEditing = () ->
     return if not @currentNote
     @currentNote.cancelEditing()
-    @currentNote = null
+    if not @currentNote.objectId
+      @currentNote = null
   @
 
 angular.module 'CMKeeper'
