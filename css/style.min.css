@@ -124,11 +124,6 @@ audio:not([controls]),
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
-  -webkit-transition: all ease-in-out 0.1s;
-  -moz-transition: all ease-in-out 0.1s;
-  -o-transition: all ease-in-out 0.1s;
-  -ms-transition: all ease-in-out 0.1s;
-  transition: all ease-in-out 0.1s;
 }
 *:focus {
   outline: 0;
@@ -470,6 +465,11 @@ body {
   color: #fff;
   text-decoration: none;
   cursor: pointer;
+  -webkit-transition: all ease-in-out 0.1s;
+  -moz-transition: all ease-in-out 0.1s;
+  -o-transition: all ease-in-out 0.1s;
+  -ms-transition: all ease-in-out 0.1s;
+  transition: all ease-in-out 0.1s;
 }
 .category:hover {
   color: #fff;
@@ -637,6 +637,11 @@ body {
   -ms-user-select: none;
   user-select: none;
   text-decoration: none;
+  -webkit-transition: all ease-in-out 0.1s;
+  -moz-transition: all ease-in-out 0.1s;
+  -o-transition: all ease-in-out 0.1s;
+  -ms-transition: all ease-in-out 0.1s;
+  transition: all ease-in-out 0.1s;
 }
 .note:hover:not(.note--active) {
   cursor: pointer;
@@ -815,7 +820,7 @@ body {
   font-weight: 300;
 }
 .ace_editor {
-  font-size: 18px !important;
+  font-size: 16px !important;
   font-weight: 200 !important;
-  line-height: 20px !important;
+  line-height: 22px !important;
 }
