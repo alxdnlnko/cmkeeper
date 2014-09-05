@@ -34,6 +34,10 @@ NotesCtrl = ($scope, $state, $stateParams, $window, $rootScope, Storage) ->
   $scope.unarchiveNote = () ->
     Storage.unarchiveNote()
 
+  $scope.deleteNote = () ->
+    if confirm "Are you sure want to delete the note?"
+      Storage.deleteNote()
+
   $scope.startEditing = () ->
     Storage.startEditing()
 

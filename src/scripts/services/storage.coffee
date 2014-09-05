@@ -84,6 +84,20 @@ Storage = (Note, Category, Errors, $rootScope, $q) ->
     @currentNote.archived = false
     @currentNote.save()
 
+  @deleteNote = () ->
+    return if not @currentNote
+    note = @currentNote
+    @currentNote = null
+    ind = @notes.indexOf note
+    @notes.splice ind, 1 if ind > -1
+
+    note.del()
+      .then(
+        null
+        (err) ->
+          @notes.unshift note
+      )
+
   @startEditing = () ->
     return if not @currentNote
     @currentNote.startEditing()
@@ -95,7 +109,7 @@ Storage = (Note, Category, Errors, $rootScope, $q) ->
 
   @saveEditing = () ->
     return if not @currentNote or not @currentNote.isEditing
-    return if not @currentNote.name
+    return if not @currentNote.editedName
     if not @currentNote.objectId
       @notes.unshift @currentNote
       @currentNote.categoryId = @currentCategory.objectId

@@ -8,29 +8,29 @@ NoteFabric = ($q, Backend, Errors) ->
     @categoryId = obj?.categoryId ? null
 
     @isEditing = false
-    @nameBackup = null
-    @contentBackup = null
+    @editedName = null
+    @editedContent = null
     @
 
   Note::startEditing = ->
     return false if @isEditing
-    @nameBackup = @name
-    @contentBackup = @content
+    @editedName = @name
+    @editedContent = @content
     @isEditing = true
 
   Note::cancelEditing = ->
     return false if not @isEditing
-    @name = @nameBackup
-    @content = @contentBackup
-    @nameBackup = null
-    @contentBackup = null
+    @editedName = null
+    @editedContent = null
     @isEditing = false
 
   Note::save = ->
     deferred = $q.defer()
     if @isEditing
-      @nameBackup = null
-      @contentBackup = null
+      @name = @editedName
+      @content = @editedContent
+      @editedName = null
+      @editedContent = null
       @isEditing = false
 
     if @objectId
@@ -48,6 +48,18 @@ NoteFabric = ($q, Backend, Errors) ->
       deferred.resolve @
     .error (data, status) =>
       deferred.reject data
+    return deferred.promise
+
+  Note::del = () ->
+    deferred = $q.defer()
+    if @objectId
+      Backend.makeRequest "data/Notes/#{@objectId}", {}, 'DELETE'
+        .success (data, status) ->
+          deferred.resolve data
+        .error (data, status) ->
+          deferred.reject data
+    else
+      deferred.reject()
     return deferred.promise
 
   Note.objects =

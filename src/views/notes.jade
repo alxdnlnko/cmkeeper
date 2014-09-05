@@ -68,11 +68,12 @@
               .note-menu-item(ng-click="startEditing()") Edit
               .note-menu-item(ng-show="!storage.currentNote.archived" ng-click="archiveNote()") Archive
               .note-menu-item(ng-show="storage.currentNote.archived" ng-click="unarchiveNote()") Unarchive
+              .note-menu-item(ng-click="deleteNote()") Delete
         .l-note-view-content.note-view-content.markdown(marked="storage.currentNote.content")
 
       .note-edit(ng-show="storage.currentNote && storage.currentNote.isEditing")
         .l-note-view-header.note-edit-header
-          input.note-edit-name(type="text", ng-model="storage.currentNote.name")
+          input.note-edit-name(type="text", ng-model="storage.currentNote.editedName")
           .l-note-view-actions.note-edit-actions
             .note-edit-action.note-edit-action--save(
                 ng-click="saveEditing()") SAVE
@@ -89,4 +90,4 @@
               mode: 'markdown', \
               theme: 'tomorrow', \
               onLoad: aceLoaded}"
-            ng-model="storage.currentNote.content")
+            ng-model="storage.currentNote.editedContent")
