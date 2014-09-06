@@ -114,10 +114,6 @@ NotesCtrl = ($scope, $state, $stateParams, $window, $rootScope, Storage) ->
         Storage.selectCategory null
       when 'notes.category'
         Storage.selectNote null
-        if Storage.notes.length
-          $state.go 'notes.category.note',
-            categoryId: Storage.currentCategory.objectId
-            noteId: Storage.notes[0]?.objectId
 
         # break
       # when 'notes.category'

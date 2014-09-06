@@ -28,11 +28,15 @@
       .caption
         .caption-item.caption-category-name {{ storage.currentCategory.name }}
         .caption-item.caption-notes-preloader.fa.fa-refresh.fa-fw.fa-spin(ng-show="storage.isLoadingNotes")
-        .caption-item.caption-arrow.fa.fa-angle-right(ng-show="!!storage.currentNote")
+        .caption-item.caption-arrow.fa.fa-angle-right(ng-show="storage.currentNote")
         .caption-item.caption-note-name {{ storage.currentNote.name }}
-      .l-header-actions.header-actions
-        .header-action.header-action-settings.fa.fa-plus(ng-click="addNote()")
-        .header-action.header-action-settings.fa.fa-cog(ng-click="editCategory()")
+      .l-header-actions.header-actions(ng-show="storage.currentCategory")
+        .header-action.header-action-addnote.fa.fa-plus.tooltip(
+            ng-click="addNote()"
+            data-tooltip="Add note")
+        .header-action.header-action-settings.fa.fa-cog.tooltip.tooltip-left(
+            ng-click="editCategory()"
+            data-tooltip="Edit category")
 
     .l-notes-bar.notes-bar
       .notes-block(

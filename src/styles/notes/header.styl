@@ -8,10 +8,14 @@
   user-select none
   cursor default
 
+.header-actions
+  clearfix()
+
 .header-action
   height $content-header-height
   width 48px
   line-height $content-header-height !important
+  float left
   vertical-align middle !important
   text-align center !important
   cursor pointer
@@ -23,15 +27,73 @@
 
 .caption
   padding-left 30px
+  height $content-header-height
+  overflow hidden
+  clearfix()
 
 .caption-item
   display inline-block
+  float left
+
+.caption-category-name
+  height $content-header-height
+  max-width 355px
+  word-break break-all
+  white-space nowrap
+  overflow hidden
+  text-overflow ellipsis
 
 .caption-arrow
-  padding 0 16px
+  height $content-header-height
+  width 48px
+  line-height $content-header-height !important
+  vertical-align middle !important
+  text-align center !important
 
 .caption-notes-preloader
-  position relative
-  top -2px
+  width 48px
+  line-height $content-header-height !important
+  vertical-align middle !important
+  text-align center !important
   margin-left 16px
   font-size 16px
+
+.caption-note-name
+  height $content-header-height
+  max-width 400px
+  white-space nowrap
+  word-break break-all
+  overflow hidden
+  text-overflow ellipsis
+
+
+// *****************************************
+//  Tooltip
+// *****************************************
+.tooltip::after
+  display inline-block
+  content attr(data-tooltip)
+  position absolute
+  top $content-header-height + 6px
+  left -50%
+  margin-left 25%
+  padding 8px 16px
+  background-color rgba(0, 0, 0, 0.70)
+  color $color-white
+  font-size 14px
+  line-height 14px
+  visibility hidden
+  opacity 0
+  transform translateY(4px)
+
+.tooltip-left::after
+  right 0
+  left inherit
+  width 100%
+  margin-left 0
+
+.tooltip:hover::after
+  visibility visible
+  opacity 1
+  transform translateY(0)
+  transition all ease-in-out .1s .5s
