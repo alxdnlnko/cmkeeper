@@ -10,14 +10,18 @@ CategoryFabric = ($q, Backend) ->
   Category::save = ->
     deferred = $q.defer()
 
-    method = if @objectId then 'PUT' else 'POST'
+    if @objectId
+      method = 'PUT'
+      url = "data/Categories/#{@objectId}"
+    else
+      method = 'POST'
+      url = "data/Categories"
+
     @isSaving = true
-    Backend.makeRequest 'data/Categories', name: @name, method
+    Backend.makeRequest url, name: @name, method
       .success (data, status) =>
         @isSaving = false
-
         @[key] = val for key, val of data when key of @
-
         deferred.resolve @
       .error (data, status) =>
         @isSaving = false

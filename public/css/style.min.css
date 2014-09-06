@@ -533,8 +533,8 @@ body {
 }
 .content {
   z-index: 1;
-  -webkit-box-shadow: 0 6px 3px rgba(0,0,0,0.23), 0 10px 10px rgba(0,0,0,0.19);
-  box-shadow: 0 6px 3px rgba(0,0,0,0.23), 0 10px 10px rgba(0,0,0,0.19);
+  -webkit-box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
 }
 .header {
   background-color: #009688;
@@ -542,8 +542,8 @@ body {
   font-size: 24px;
   line-height: 64px;
   z-index: 5;
-  -webkit-box-shadow: 0 1px 1px rgba(0,0,0,0.24), 0 1px 1.5px rgba(0,0,0,0.12);
-  box-shadow: 0 1px 1px rgba(0,0,0,0.24), 0 1px 1.5px rgba(0,0,0,0.12);
+  -webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
@@ -646,11 +646,11 @@ body {
   opacity: 0;
   -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
   filter: alpha(opacity=0);
-  -webkit-transform: translateY(4px);
-  -moz-transform: translateY(4px);
-  -o-transform: translateY(4px);
-  -ms-transform: translateY(4px);
-  transform: translateY(4px);
+  -webkit-transform: translateY(-4px);
+  -moz-transform: translateY(-4px);
+  -o-transform: translateY(-4px);
+  -ms-transform: translateY(-4px);
+  transform: translateY(-4px);
 }
 .tooltip-left::after {
   right: 0;
@@ -668,16 +668,16 @@ body {
   -o-transform: translateY(0);
   -ms-transform: translateY(0);
   transform: translateY(0);
-  -webkit-transition: all ease-in-out 0.1s 0.5s;
-  -moz-transition: all ease-in-out 0.1s 0.5s;
-  -o-transition: all ease-in-out 0.1s 0.5s;
-  -ms-transition: all ease-in-out 0.1s 0.5s;
-  transition: all ease-in-out 0.1s 0.5s;
+  -webkit-transition: all ease-in-out 0.2s 0.2s;
+  -moz-transition: all ease-in-out 0.2s 0.2s;
+  -o-transition: all ease-in-out 0.2s 0.2s;
+  -ms-transition: all ease-in-out 0.2s 0.2s;
+  transition: all ease-in-out 0.2s 0.2s;
 }
 .notes-bar {
   z-index: 4;
-  -webkit-box-shadow: 0 1px 1px rgba(0,0,0,0.24), 0 1px 1.5px rgba(0,0,0,0.12);
-  box-shadow: 0 1px 1px rgba(0,0,0,0.24), 0 1px 1.5px rgba(0,0,0,0.12);
+  -webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
   background-color: #fff;
 }
 .notes-block {
@@ -804,8 +804,8 @@ body {
   background-color: #fff;
   -webkit-border-radius: 2px;
   border-radius: 2px;
-  -webkit-box-shadow: 0 1px 1px rgba(0,0,0,0.24), 0 1px 1.5px rgba(0,0,0,0.12);
-  box-shadow: 0 1px 1px rgba(0,0,0,0.24), 0 1px 1.5px rgba(0,0,0,0.12);
+  -webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
 }
 .note-menu-item {
   padding-left: 16px;
@@ -896,6 +896,8 @@ body {
   font-family: monospace;
   font-weight: 200;
   background-color: rgba(0,0,0,0.05);
+  word-wrap: break-word;
+  word-break: break-word;
 }
 .note-edit-header {
   padding: 0 16px;
@@ -933,4 +935,95 @@ body {
   font-size: 16px !important;
   font-weight: 200 !important;
   line-height: 22px !important;
+}
+.modal-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 9999;
+  background-color: rgba(0,0,0,0.12);
+}
+.dialog {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -moz-transform: translate(-50%, -50%);
+  -o-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  height: 180px;
+  width: 400px;
+  z-index: 10000;
+  background-color: #fff;
+  -webkit-border-radius: 2px;
+  border-radius: 2px;
+  -webkit-box-shadow: 0 19px 38px rgba(0,0,0,0.3), 0 15px 12px rgba(0,0,0,0.22);
+  box-shadow: 0 19px 38px rgba(0,0,0,0.3), 0 15px 12px rgba(0,0,0,0.22);
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  cursor: default;
+}
+.dialog-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 52px;
+  padding: 24px;
+}
+.dialog-title {
+  margin-bottom: 24px;
+  font-size: 20px;
+  font-weight: 500;
+  color: rgba(0,0,0,0.54);
+}
+.dialog-input {
+  padding: 2px 0;
+  width: 100%;
+  border: 0;
+  border-bottom: 2px solid #03a9f4;
+  font-family: 'RobotoDraft', 'sans-serif';
+  font-size: 20px;
+  font-weight: 300;
+  color: rgba(0,0,0,0.87);
+}
+.dialog-actions {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 36px;
+  margin-bottom: 16px;
+  padding: 0 16px;
+  zoom: 1;
+}
+.dialog-actions:before,
+.dialog-actions:after {
+  content: "";
+  display: table;
+}
+.dialog-actions:after {
+  clear: both;
+}
+.dialog-action {
+  display: inline-block;
+  height: 36px;
+  min-width: 36px;
+  padding: 0 16px;
+  line-height: 36px;
+  float: right;
+  text-transform: uppercase;
+  font-weight: 500;
+  color: rgba(0,0,0,0.54);
+}
+.dialog-action:hover {
+  cursor: pointer;
+}
+.dialog-action-primary {
+  color: #009688;
 }

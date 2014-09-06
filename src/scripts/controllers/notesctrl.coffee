@@ -9,6 +9,34 @@ NotesCtrl = ($scope, $state, $stateParams, $window, $rootScope, Storage) ->
   $scope.categoriesOrder = 'created'
   $scope.isNoteMenuVisible = false
 
+  $scope.isCategoryDialogVisible = false
+  $scope.editedCategoryName = null
+
+  $scope.showCategoryDialog = () ->
+    return if not Storage.currentCategory
+    $scope.isCategoryDialogVisible = true
+
+  $scope.hideCategoryDialog = () ->
+    $scope.isCategoryDialogVisible = false
+
+  $scope.editCategory = () ->
+    return if not Storage.currentCategory
+    $scope.editedCategoryName = Storage.currentCategory.name
+    $scope.showCategoryDialog()
+
+  $scope.cancelEditingCategory = () ->
+    $scope.editedCategoryName = null
+    $scope.hideCategoryDialog()
+
+  $scope.saveEditedCategory = () ->
+    return if not Storage.currentCategory or not $scope.editedCategoryName
+    cat = Storage.currentCategory
+    cat.name = $scope.editedCategoryName
+    cat.save()
+
+    $scope.editedCategoryName = null
+    $scope.hideCategoryDialog()
+
   $scope.showNoteMenu = () ->
     $scope.isNoteMenuVisible = true
 
@@ -106,6 +134,12 @@ NotesCtrl = ($scope, $state, $stateParams, $window, $rootScope, Storage) ->
       when 27
         $scope.cancelEditing()
 
+  $scope.editCategoryInputKey = (ev) ->
+    switch ev.keyCode
+      when 13
+        $scope.saveEditedCategory()
+      when 27
+        $scope.cancelEditingCategory()
 
   # parse url, render the page
   stateChanged = () ->

@@ -103,3 +103,18 @@
               theme: 'tomorrow', \
               onLoad: aceLoaded}"
             ng-model="storage.currentNote.editedContent")
+
+  .modal(ng-show="isCategoryDialogVisible")
+    .modal-overlay(ng-click="cancelEditingCategory()")
+    .dialog.category-dialog
+      .dialog-wrapper
+        .dialog-title Edit category
+        .dialog-content
+          input.dialog-input.category-edit-input(
+              ng-keyup="editCategoryInputKey($event)"
+              ng-model="editedCategoryName"
+              cm-focus="isCategoryDialogVisible"
+              placeholder="Category name")
+      .dialog-actions
+        .dialog-action.dialog-action-primary(ng-click="saveEditedCategory()") Save
+        .dialog-action(ng-click="cancelEditingCategory()") Cancel

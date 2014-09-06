@@ -1,0 +1,75 @@
+.modal-overlay
+  position absolute
+  top 0
+  left 0
+  right 0
+  bottom 0
+  z-index 9999
+  background-color $color-light-grey-bk
+
+.dialog
+  position absolute
+  top 50%
+  left 50%
+  transform translate(-50%, -50%)
+  height 180px
+  width 400px
+  z-index 10000
+  background-color $color-white
+  border-radius 2px
+  shadow-5()
+  user-select none
+  cursor default
+
+.dialog-wrapper
+  position absolute
+  top 0
+  left 0
+  right 0
+  bottom 52px
+  padding 24px
+
+.dialog-title
+  margin-bottom 24px
+  font-size 20px
+  font-weight 500
+  color $color-text-light
+
+.dialog-content {}
+
+.dialog-input
+  padding 2px 0
+  width 100%
+  border 0
+  border-bottom 2px solid $color-blue
+  font-family 'RobotoDraft', 'sans-serif'
+  font-size 20px
+  font-weight 300
+  color $color-text-black
+
+.dialog-actions
+  position absolute
+  bottom 0
+  left 0
+  right 0
+  height 36px
+  margin-bottom 16px
+  padding 0 16px
+  clearfix()
+
+.dialog-action
+  display inline-block
+  height 36px
+  min-width 36px
+  padding 0 16px
+  line-height 36px
+  float right
+  text-transform uppercase
+  font-weight 500
+  color $color-text-light
+
+  &:hover
+    cursor pointer
+
+.dialog-action-primary
+  color $color-base
