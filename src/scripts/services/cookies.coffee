@@ -14,6 +14,9 @@ CookiesFactory = ($document) ->
         [cn, cv] = cookie.split '='
         return decodeURIComponent cv if cn.trim() is name
       null
+    del: (name) ->
+      name = encodeURIComponent name
+      document.cookie = "#{name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC"
   }
 
 angular.module 'CMKeeper'

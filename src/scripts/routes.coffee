@@ -123,7 +123,7 @@ configureRoutes = ($stateProvider, $urlRouterProvider) ->
             return deferred.promise
         ]
 
-RedirectsCtrl = ($rootScope, $state, $stateParams, Errors) ->
+RedirectsCtrl = ($rootScope, $state, $stateParams, Errors, Backend) ->
   $rootScope.$on '$stateChangeError',
     (event, toState, toParams, fromState, fromParams, error) ->
       event.preventDefault()
@@ -141,6 +141,9 @@ RedirectsCtrl = ($rootScope, $state, $stateParams, Errors) ->
             return $state.go 'notes.category', categoryId: $stateParams.categoryId
           else
             return $state.go 'notes'
+        when Errors.NOT_EXISTING_USER_TOKEN
+          Backend.clearUserToken()
+          return $state.go 'login'
         else
           console.log arguments
 
@@ -154,4 +157,5 @@ angular.module 'CMKeeper'
     '$state',
     '$stateParams',
     'Errors',
+    'Backend',
     RedirectsCtrl]

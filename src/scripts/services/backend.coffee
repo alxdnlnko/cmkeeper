@@ -9,6 +9,10 @@ Backend = (Cookies, $http, $q) ->
   @isAuthorized = () ->
     return @userToken?
 
+  @clearUserToken = () ->
+    @userToken = null
+    Cookies.del 'user-token'
+
   @makeRequest = (url, data, method) ->
     headers =
       'application-id': APP_ID

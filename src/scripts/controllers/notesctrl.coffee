@@ -122,22 +122,16 @@ NotesCtrl = ($scope, $state, $stateParams, $window, $rootScope, Storage) ->
   # keyEvents
   $scope.newCategoryInputKey = (ev) ->
     switch ev.keyCode
-      when 13
-        $scope.saveCategory()
       when 27
         $scope.cancelNewCategory()
 
   $scope.editNoteInputKey = (ev) ->
     switch ev.keyCode
-      when 13
-        $scope.saveEditing()
       when 27
         $scope.cancelEditing()
 
   $scope.editCategoryInputKey = (ev) ->
     switch ev.keyCode
-      when 13
-        $scope.saveEditedCategory()
       when 27
         $scope.cancelEditingCategory()
 
