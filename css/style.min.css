@@ -505,6 +505,9 @@ body {
   background-color: #3c3c3c;
   cursor: default;
 }
+.category-add form {
+  display: inline-block;
+}
 .category-add-icon {
   margin-right: 10px;
   text-align: center;
@@ -551,6 +554,7 @@ body {
   cursor: default;
 }
 .header-actions {
+  background-color: #009688;
   zoom: 1;
 }
 .header-actions:before,
@@ -901,6 +905,19 @@ body {
 }
 .note-edit-header {
   padding: 0 16px;
+  white-space: nowrap;
+  zoom: 1;
+}
+.note-edit-header:before,
+.note-edit-header:after {
+  content: "";
+  display: table;
+}
+.note-edit-header:after {
+  clear: both;
+}
+.note-edit-name-form {
+  float: left;
 }
 .note-edit-name {
   padding: 2px 0;
@@ -1020,10 +1037,20 @@ body {
   text-transform: uppercase;
   font-weight: 500;
   color: rgba(0,0,0,0.54);
+  -webkit-transition: all ease-in-out 0.2s;
+  -moz-transition: all ease-in-out 0.2s;
+  -o-transition: all ease-in-out 0.2s;
+  -ms-transition: all ease-in-out 0.2s;
+  transition: all ease-in-out 0.2s;
 }
 .dialog-action:hover {
   cursor: pointer;
+  background-color: rgba(0,0,0,0.12);
 }
 .dialog-action-primary {
   color: #009688;
+}
+.dialog-action-primary:hover {
+  color: #fff;
+  background-color: #009688;
 }
