@@ -1,7 +1,7 @@
 $color-md-header = #718C00
 $color-md-blockquote-border = rgba(0,0,0,.12)
 $color-md-blockquote-bk = rgba(0,0,0,.05)
-$color-md-pre-bk = rgba(0,0,0,.05)
+$color-md-pre-bk = #efefef
 
 .markdown
   font-size 16px
@@ -75,13 +75,16 @@ $color-md-pre-bk = rgba(0,0,0,.05)
 
   pre
     padding 10px
+    margin-bottom 10px
+    background-color $color-md-pre-bk
+
+  code
     font-family monospace
     font-weight 200
     background-color $color-md-pre-bk
     word-wrap break-word
     word-break break-word
 
-  code {}
 
   del {}
   img {}

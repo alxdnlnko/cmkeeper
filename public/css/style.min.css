@@ -185,14 +185,14 @@ body {
   top: 64px;
   left: 0;
   right: 0;
-  bottom: 64px;
+  bottom: 80px;
 }
 .l-nav-bar-footer {
   position: absolute;
   left: 0;
   right: 0;
   bottom: 0;
-  height: 64px;
+  height: 80px;
 }
 .l-content {
   position: absolute;
@@ -897,9 +897,13 @@ body {
 }
 .markdown pre {
   padding: 10px;
+  margin-bottom: 10px;
+  background-color: #efefef;
+}
+.markdown code {
   font-family: monospace;
   font-weight: 200;
-  background-color: rgba(0,0,0,0.05);
+  background-color: #efefef;
   word-wrap: break-word;
   word-break: break-word;
 }
@@ -1037,20 +1041,31 @@ body {
   text-transform: uppercase;
   font-weight: 500;
   color: rgba(0,0,0,0.54);
-  -webkit-transition: all ease-in-out 0.2s;
-  -moz-transition: all ease-in-out 0.2s;
-  -o-transition: all ease-in-out 0.2s;
-  -ms-transition: all ease-in-out 0.2s;
-  transition: all ease-in-out 0.2s;
+  -webkit-transition: all ease-in-out 0.1s;
+  -moz-transition: all ease-in-out 0.1s;
+  -o-transition: all ease-in-out 0.1s;
+  -ms-transition: all ease-in-out 0.1s;
+  transition: all ease-in-out 0.1s;
 }
 .dialog-action:hover {
   cursor: pointer;
-  background-color: rgba(0,0,0,0.12);
+  color: rgba(0,0,0,0.76);
+  -webkit-transform: translateY(-2px);
+  -moz-transform: translateY(-2px);
+  -o-transform: translateY(-2px);
+  -ms-transform: translateY(-2px);
+  transform: translateY(-2px);
 }
 .dialog-action-primary {
-  color: #009688;
+  color: #56b2a9;
 }
 .dialog-action-primary:hover {
-  color: #fff;
-  background-color: #009688;
+  color: #009688;
+}
+.dialog-action-left {
+  float: left;
+  color: #f9bdbb;
+}
+.dialog-action-left:hover {
+  color: #e51c23;
 }

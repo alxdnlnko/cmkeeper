@@ -67,15 +67,22 @@
   text-transform uppercase
   font-weight 500
   color $color-text-light
-  transition all ease-in-out .2s
+  transition all ease-in-out .1s
 
   &:hover
     cursor pointer
-    background-color $color-light-grey-bk
+    color $color-text-middle
+    transform translateY(-2px)
 
 .dialog-action-primary
-  color $color-base
+  color $color-light-base
 
   &:hover
-    color $color-white
-    background-color $color-base
+    color $color-base
+
+.dialog-action-left
+  float left
+  color $color-light-red
+
+  &:hover
+    color $color-red

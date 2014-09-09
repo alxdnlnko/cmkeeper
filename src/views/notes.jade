@@ -22,7 +22,7 @@
     .l-nav-bar-footer.nav-bar-footer
       | © Alex Danilenko 2014<br><br>
       | Powered by<br>
-      | AngularJS, BackendLess, Ace
+      | AngularJS, Ace, GitHub.io,<br>BackendLess
 
   .l-content.content
     .l-header.header
@@ -119,5 +119,6 @@
                 cm-focus="isCategoryDialogVisible"
                 placeholder="Category name")
       .dialog-actions
+        .dialog-action.dialog-action-left Delete
         .dialog-action.dialog-action-primary(ng-click="saveEditedCategory()") Save
         .dialog-action(ng-click="cancelEditingCategory()") Cancel
