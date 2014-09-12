@@ -85,3 +85,34 @@
 .note-menu.ng-hide-remove-active
   opacity 1
   transform translateY(0)
+
+
+
+// *****************************************
+//  Note edit
+// *****************************************
+.note-edit.ng-hide-remove,
+.note-edit.ng-hide-add
+  transition .2s
+
+.note-edit.ng-hide-remove .note-edit-header
+  transform translateY(-40px)
+  opacity 0
+  transition all ease-in-out .2s
+
+.note-edit.ng-hide-remove-active .note-edit-header
+  transform translateY(0)
+  opacity 1
+
+.note-edit.ng-hide-add .note-edit-header
+  transform translateY(0)
+  opacity 1
+  transition all ease-in-out .2s
+
+.note-edit.ng-hide-add-active .note-edit-header
+  opacity 0
+  transform translateY(-40px)
+
+.note-edit.ng-hide-add .note-edit-content,
+.note-edit.ng-hide-add-active .note-edit-content
+  display none!important

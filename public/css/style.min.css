@@ -754,8 +754,8 @@ body {
   -ms-transition: -ms-transform ease-in-out 0.2s;
   transition: transform ease-in-out 0.2s;
 }
-.notes-list {
-  padding-bottom: 24px;
+.notes-list > :last-child {
+  margin-bottom: 24px;
 }
 .note {
   display: block;
@@ -811,9 +811,19 @@ body {
   padding: 0 16px;
   text-transform: uppercase;
   cursor: pointer;
+  -webkit-transition: all ease-in-out 0.1s;
+  -moz-transition: all ease-in-out 0.1s;
+  -o-transition: all ease-in-out 0.1s;
+  -ms-transition: all ease-in-out 0.1s;
+  transition: all ease-in-out 0.1s;
 }
 .note-view-action:hover,
 .note-edit-action:hover {
+  -webkit-transform: translateY(-2px);
+  -moz-transform: translateY(-2px);
+  -o-transform: translateY(-2px);
+  -ms-transform: translateY(-2px);
+  transform: translateY(-2px);
   color: rgba(0,0,0,0.87);
 }
 .note-view-extra,
@@ -960,9 +970,13 @@ body {
   font-size: 20px;
   font-weight: 300;
   color: rgba(0,0,0,0.87);
+  background-color: transparent;
 }
 .note-edit-actions {
   display: inline-block;
+}
+.note-edit-action--save:hover {
+  color: #009688;
 }
 .note-edit-content {
   padding: 16px;
@@ -1234,4 +1248,66 @@ body {
   -o-transform: translateY(0);
   -ms-transform: translateY(0);
   transform: translateY(0);
+}
+.note-edit.ng-hide-remove,
+.note-edit.ng-hide-add {
+  -webkit-transition: 0.2s;
+  -moz-transition: 0.2s;
+  -o-transition: 0.2s;
+  -ms-transition: 0.2s;
+  transition: 0.2s;
+}
+.note-edit.ng-hide-remove .note-edit-header {
+  -webkit-transform: translateY(-40px);
+  -moz-transform: translateY(-40px);
+  -o-transform: translateY(-40px);
+  -ms-transform: translateY(-40px);
+  transform: translateY(-40px);
+  opacity: 0;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+  filter: alpha(opacity=0);
+  -webkit-transition: all ease-in-out 0.2s;
+  -moz-transition: all ease-in-out 0.2s;
+  -o-transition: all ease-in-out 0.2s;
+  -ms-transition: all ease-in-out 0.2s;
+  transition: all ease-in-out 0.2s;
+}
+.note-edit.ng-hide-remove-active .note-edit-header {
+  -webkit-transform: translateY(0);
+  -moz-transform: translateY(0);
+  -o-transform: translateY(0);
+  -ms-transform: translateY(0);
+  transform: translateY(0);
+  opacity: 1;
+  -ms-filter: none;
+  filter: none;
+}
+.note-edit.ng-hide-add .note-edit-header {
+  -webkit-transform: translateY(0);
+  -moz-transform: translateY(0);
+  -o-transform: translateY(0);
+  -ms-transform: translateY(0);
+  transform: translateY(0);
+  opacity: 1;
+  -ms-filter: none;
+  filter: none;
+  -webkit-transition: all ease-in-out 0.2s;
+  -moz-transition: all ease-in-out 0.2s;
+  -o-transition: all ease-in-out 0.2s;
+  -ms-transition: all ease-in-out 0.2s;
+  transition: all ease-in-out 0.2s;
+}
+.note-edit.ng-hide-add-active .note-edit-header {
+  opacity: 0;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+  filter: alpha(opacity=0);
+  -webkit-transform: translateY(-40px);
+  -moz-transform: translateY(-40px);
+  -o-transform: translateY(-40px);
+  -ms-transform: translateY(-40px);
+  transform: translateY(-40px);
+}
+.note-edit.ng-hide-add .note-edit-content,
+.note-edit.ng-hide-add-active .note-edit-content {
+  display: none !important;
 }
