@@ -1,0 +1,87 @@
+// *****************************************
+//  Category Edit Dialog
+// *****************************************
+
+// show
+.modal.ng-hide-remove,
+.modal.ng-hide-remove-active
+  transition .2s
+
+.modal.ng-hide-remove .modal-overlay
+  opacity 0
+  transition all ease-in-out .2s
+
+.modal.ng-hide-remove-active .modal-overlay
+  opacity 1
+
+
+// hide
+.modal.ng-hide-add,
+.modal.ng-hide-add-active
+  transition .2s
+
+.modal.ng-hide-add .modal-overlay
+  opacity 1
+
+.modal.ng-hide-add-active .modal-overlay
+  opacity 0
+  transition all ease-in-out .2s
+
+.modal.ng-hide-add .dialog,
+.modal.ng-hide-add-active .dialog
+  display none!important
+
+
+
+// *****************************************
+//  Notes Preloader
+// *****************************************
+.caption-notes-preloader.ng-hide-remove
+  opacity 0
+  transform scale(.5)
+  transition all ease-in-out .2s
+
+.caption-notes-preloader.ng-hide-remove-active
+  transform scale(1)
+  opacity 1
+
+.caption-notes-preloader.ng-hide-add,
+.caption-notes-preloader.ng-hide-add-active
+  display none!important
+
+
+
+// *****************************************
+//  Header arrow and note name
+// *****************************************
+.caption-arrow.ng-hide-remove
+  opacity 0
+  transform translateX(-10px)
+  transition all ease-in-out .2s
+
+.caption-arrow.ng-hide-remove-active
+  opacity 1
+  transform translateX(0)
+
+.caption-note-name.ng-hide-remove
+  opacity 0
+  transform translateX(-5px)
+  transition all ease-in-out .2s .1s
+
+.caption-note-name.ng-hide-remove-active
+  opacity 1
+  transform translateX(0)
+
+
+
+// *****************************************
+//  Note menu
+// *****************************************
+.note-menu.ng-hide-remove
+  opacity 0
+  transform translateY(-5px)
+  transition all ease-in-out .2s
+
+.note-menu.ng-hide-remove-active
+  opacity 1
+  transform translateY(0)

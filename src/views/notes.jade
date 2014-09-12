@@ -28,9 +28,9 @@
     .l-header.header
       .caption
         .caption-item.caption-category-name {{ storage.currentCategory.name }}
-        .caption-item.caption-notes-preloader.fa.fa-refresh.fa-fw.fa-spin(ng-show="storage.isLoadingNotes")
-        .caption-item.caption-arrow.fa.fa-angle-right(ng-show="storage.currentNote")
-        .caption-item.caption-note-name {{ storage.currentNote.name }}
+        .caption-item.caption-notes-preloader.fa.fa-refresh.fa-fw.fa-spin.cm-animated(ng-show="storage.isLoadingNotes")
+        .caption-item.caption-arrow.fa.fa-angle-right.cm-animated(ng-show="storage.currentNote")
+        .caption-item.caption-note-name.cm-animated(ng-show="storage.currentNote") {{ storage.currentNote.name }}
       .l-header-actions.header-actions(ng-show="storage.currentCategory")
         .header-action.header-action-addnote.fa.fa-plus.tooltip(
             ng-click="addNote()"
@@ -73,7 +73,7 @@
 
           .l-note-view-extras.note-view-extras
             .note-view-extra.note-menu-toggle.fa.fa-ellipsis-v.fa-lg(ng-click="showNoteMenu()")
-            .l-note-menu.note-menu(cm-menu ng-show="isNoteMenuVisible" on-close="hideNoteMenu()")
+            .l-note-menu.note-menu.cm-animated(cm-menu ng-show="isNoteMenuVisible" on-close="hideNoteMenu()")
               .note-menu-item(ng-click="startEditing()") Edit
               .note-menu-item(ng-show="!storage.currentNote.archived" ng-click="archiveNote()") Archive
               .note-menu-item(ng-show="storage.currentNote.archived" ng-click="unarchiveNote()") Unarchive
@@ -106,9 +106,9 @@
               onLoad: aceLoaded}"
             ng-model="storage.currentNote.editedContent")
 
-  .modal(ng-show="isCategoryDialogVisible")
-    .modal-overlay(ng-click="cancelEditingCategory()")
-    .dialog.category-dialog
+  .l-modal.modal.cm-animated(ng-show="isCategoryDialogVisible")
+    .l-modal-overlay.modal-overlay(ng-click="cancelEditingCategory()")
+    .l-dialog.dialog.category-dialog
       .dialog-wrapper
         .dialog-title Edit category
         .dialog-content

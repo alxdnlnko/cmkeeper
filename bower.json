@@ -2,5 +2,12 @@
   "name": "CMKeeper",
   "version": "0.0.1",
   "dependencies": {
+    "angular": "~1.2.24",
+    "angular-animate": "~1.2.24",
+    "angular-ui-router": "~0.2.11",
+    "angular-marked": "~0.0.12",
+    "angular-ui-ace": "~0.1.1",
+    "ace-builds": "~1.1.6",
+    "marked": "~0.3.2"
   }
 }

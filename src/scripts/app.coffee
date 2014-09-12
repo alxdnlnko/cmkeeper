@@ -10,11 +10,13 @@ require '../../bower_components/ace-builds/src-min-noconflict/ace.js'
 require '../../bower_components/ace-builds/src-min-noconflict/mode-markdown.js'
 require '../../bower_components/ace-builds/src-min-noconflict/theme-tomorrow.js'
 require 'angular-ui-ace'
+require 'angular-animate'
 
 angular.module 'CMKeeper', [
   'ui.router',
   'hc.marked',
-  'ui.ace'
+  'ui.ace',
+  'ngAnimate'
 ]
 
 angular.module 'CMKeeper'
@@ -29,6 +31,13 @@ angular.module 'CMKeeper'
         sanitize: true
         smartLists: true
         smartypants: true
+  ]
+
+angular.module 'CMKeeper'
+  .config [
+    '$animateProvider',
+    ($animateProvider) ->
+      $animateProvider.classNameFilter /.*cm-animated.*/
   ]
 
 require './models'

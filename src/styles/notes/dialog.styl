@@ -1,17 +1,10 @@
+.modal
+  z-index 9998
+
 .modal-overlay
-  position absolute
-  top 0
-  left 0
-  right 0
-  bottom 0
-  z-index 9999
   background-color $color-light-grey-bk
 
 .dialog
-  position absolute
-  top 50%
-  left 50%
-  transform translate(-50%, -50%)
   height 180px
   width 400px
   z-index 10000
@@ -75,14 +68,11 @@
     transform translateY(-2px)
 
 .dialog-action-primary
-  color $color-light-base
-
   &:hover
     color $color-base
 
 .dialog-action-left
   float left
-  color $color-light-red
 
   &:hover
     color $color-red
