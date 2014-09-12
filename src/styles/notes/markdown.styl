@@ -1,3 +1,5 @@
+@import 'hljs-github'
+
 $color-md-header = #718C00
 $color-md-blockquote-border = rgba(0,0,0,.12)
 $color-md-blockquote-bk = rgba(0,0,0,.05)
@@ -61,12 +63,10 @@ $color-md-pre-bk = #efefef
 
   ul
     list-style disc outside
-
-  li
     margin-left 20px
 
-    ul
-      list-style-type circle
+  li ul
+    list-style-type circle
 
   blockquote
     padding 5px 20px
@@ -80,6 +80,7 @@ $color-md-pre-bk = #efefef
 
   code
     font-family monospace
+    font-size 14px
     font-weight 200
     background-color $color-md-pre-bk
     word-wrap break-word
@@ -99,3 +100,21 @@ $color-md-pre-bk = #efefef
   tr {}
   th {}
   td {}
+
+
+  .checkbox-item
+    list-style none
+
+    label
+      margin-left -24px
+      padding-right 2px
+      border-radius 2px
+      cursor pointer
+
+      &:hover
+        background-color rgba(0,0,0,.04)
+
+      input
+        position relative
+        top 2px
+        margin-right 7px
