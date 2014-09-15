@@ -1021,6 +1021,7 @@ body {
 }
 .markdown ol {
   list-style: decimal outside;
+  margin-left: 20px;
 }
 .markdown ul {
   list-style: disc outside;
