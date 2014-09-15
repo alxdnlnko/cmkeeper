@@ -78,7 +78,8 @@
               .note-menu-item(ng-show="!storage.currentNote.archived" ng-click="archiveNote()") Archive
               .note-menu-item(ng-show="storage.currentNote.archived" ng-click="unarchiveNote()") Unarchive
               .note-menu-item(ng-click="deleteNote()") Delete
-        .l-note-view-content.note-view-content.markdown(marked="storage.currentNote.content")
+        cm-marked.l-note-view-content.note-view-content.markdown(
+            note="storage.currentNote")
 
       .note-edit.cm-animated(ng-show="storage.currentNote && storage.currentNote.isEditing")
         .l-note-view-header.note-edit-header
