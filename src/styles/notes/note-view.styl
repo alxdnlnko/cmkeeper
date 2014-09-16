@@ -35,14 +35,20 @@
 .note-view-extras {}
 
 .note-view-extra
+  position relative
   padding 0 16px
   height $note-view-header-height
   line-height $note-view-header-height!important
   vertical-align middle!important
   cursor pointer
+  transition all ease-in-out .1s
 
   &:hover
+    transform translateY(-2px)
     color $color-text-black
+
+.note-view-extra-delete:hover
+  color $color-red
 
 .note-menu
   display block

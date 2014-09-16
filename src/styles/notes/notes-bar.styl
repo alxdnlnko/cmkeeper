@@ -3,6 +3,26 @@
   shadow-1()
   background-color $color-white
 
+.notes-bar-actions
+  height 48px
+  border-bottom 1px solid #efefef
+  clearfix()
+
+.notes-bar-action
+  padding 0 16px
+  line-height 48px
+  color $color-text-light
+  font-size 14px
+  font-weight 500
+  cursor pointer
+  user-select none
+  transition all ease-in-out .1s
+  float left
+
+  &:hover
+    color $color-black
+    transform translateY(-2px)
+
 .notes-block
   overflow hidden
 
@@ -38,7 +58,7 @@
   transition transform ease-in-out .2s
 
 .notes-list > :last-child
-  margin-bottom 24px
+  margin-bottom 16px
 
 .note
   display block

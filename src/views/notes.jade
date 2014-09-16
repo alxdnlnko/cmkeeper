@@ -27,22 +27,24 @@
   .l-content.content
     .l-header.header
       .caption
+        .caption-item.caption-category-placeholder(ng-hide="storage.currentCategory") Category not selected
         .caption-item.caption-category-name {{ storage.currentCategory.name }}
         .caption-item.caption-notes-preloader.fa.fa-refresh.fa-fw.fa-spin.cm-animated(ng-show="storage.isLoadingNotes")
         .caption-item.caption-arrow.fa.fa-angle-right.cm-animated(ng-show="storage.currentNote")
         .caption-item.caption-note-name.cm-animated(ng-show="storage.currentNote") {{ storage.currentNote.name }}
       .l-header-actions.header-actions(ng-show="storage.currentCategory")
-        .header-action.header-action-addnote.fa.fa-plus.tooltip(
-            ng-click="addNote()"
-            data-tooltip="Add note")
         .header-action.header-action-settings.fa.fa-cog.tooltip.tooltip-left(
             ng-click="editCategory()"
             data-tooltip="Edit category")
 
     .l-notes-bar.notes-bar
+      .notes-bar-actions(ng-show="storage.currentCategory")
+        .notes-bar-action.notes-bar-action-add-note(ng-click="addNote()") ADD NOTE
       .notes-block(
+          ng-show="storage.currentCategory"
           ng-class="{'notes-block--open': showNonArcihved}")
-        .notes-block-header(ng-click="toggleNonArchived()") Notes
+        .notes-block-header(ng-click="toggleNonArchived()")
+          span Notes
           .notes-block-toggle.fa.fa-caret-right
         ul.notes-list
           li(ng-repeat="note in storage.notes | filter: filterNonArchived")
@@ -53,6 +55,7 @@
               .note-action
 
       .notes-block(
+          ng-show="storage.currentCategory"
           ng-class="{'notes-block--open': showArcihved}")
         .notes-block-header(ng-click="toggleArchived()") Archive
           .notes-block-toggle.fa.fa-caret-right
@@ -72,12 +75,17 @@
                 ng-click="startEditing()") EDIT
 
           .l-note-view-extras.note-view-extras
-            .note-view-extra.note-menu-toggle.fa.fa-ellipsis-v.fa-lg(ng-click="showNoteMenu()")
-            .l-note-menu.note-menu.cm-animated(cm-menu ng-show="isNoteMenuVisible" on-close="hideNoteMenu()")
-              .note-menu-item(ng-click="startEditing()") Edit
-              .note-menu-item(ng-show="!storage.currentNote.archived" ng-click="archiveNote()") Archive
-              .note-menu-item(ng-show="storage.currentNote.archived" ng-click="unarchiveNote()") Unarchive
-              .note-menu-item(ng-click="deleteNote()") Delete
+            .note-view-extra.note-view-extra-delete.fa.fa-trash-o.fa-lg.tooltip(
+                ng-click="deleteNote()"
+                data-tooltip="Delete")
+            .note-view-extra.note-view-extra-archive.fa.fa-download.fa-lg.tooltip.tooltip-left(
+                ng-hide="storage.currentNote.archived"
+                ng-click="archiveNote()"
+                data-tooltip="Archive")
+            .note-view-extra.note-view-extra-archive.fa.fa-upload.fa-lg.tooltip.tooltip-left(
+                ng-show="storage.currentNote.archived"
+                ng-click="unarchiveNote()"
+                data-tooltip="Unarchive")
         cm-marked.l-note-view-content.note-view-content.markdown(
             note="storage.currentNote")
 
@@ -96,7 +104,6 @@
                 ng-click="cancelEditing()") CANCEL
 
         .l-note-view-extras.note-edit-extras
-          .note-edit-extra.fa.fa-ellipsis-v.fa-lg
 
         .l-note-view-content.note-edit-content
           .note-edit-editor(

@@ -14,7 +14,7 @@
 
 .header-action
   height $content-header-height
-  width 48px
+  width 64px
   line-height $content-header-height !important
   float left
   vertical-align middle !important
@@ -35,6 +35,9 @@
 .caption-item
   display inline-block
   float left
+
+.caption-category-placeholder
+  color rgba(255,255,255,.5)
 
 .caption-category-name
   height $content-header-height
@@ -68,35 +71,3 @@
   word-break break-all
   overflow hidden
   text-overflow ellipsis
-
-
-// *****************************************
-//  Tooltip
-// *****************************************
-.tooltip::after
-  display inline-block
-  content attr(data-tooltip)
-  position absolute
-  top $content-header-height + 6px
-  left -50%
-  margin-left 25%
-  padding 8px 16px
-  background-color rgba(0, 0, 0, 0.70)
-  color $color-white
-  font-size 14px
-  line-height 14px
-  visibility hidden
-  opacity 0
-  transform translateY(-4px)
-
-.tooltip-left::after
-  right 0
-  left inherit
-  width 100%
-  margin-left 0
-
-.tooltip:hover::after
-  visibility visible
-  opacity 1
-  transform translateY(0)
-  transition all ease-in-out .2s .2s
