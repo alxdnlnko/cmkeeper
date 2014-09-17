@@ -112,10 +112,31 @@ $color-md-pre-bk = #efefef
       border-radius 2px
       cursor pointer
 
-      &:hover
-        background-color rgba(0,0,0,.04)
-
       input
         position relative
         top 2px
         margin-right 7px
+
+        &:before
+          display block
+          content ""
+          z-index -1
+          position absolute
+          top -2px
+          left -2px
+          right -1px
+          bottom -1px
+          border-radius 3px
+          background-color rgba(249,0,0,0.17)
+          opacity 0
+          transition opacity ease-in-out .2s
+
+      &:hover input:before
+        opacity 1
+
+    &--checked
+      color $color-text-light
+      transition color ease-in-out .2s
+
+      &:hover
+        color inherit

@@ -15,9 +15,13 @@ cmMarkedProvider = () ->
         nested = if nestedInd > -1 then text.slice nestedInd else ''
         text = text.replace nested, ''
 
-        if /^\s*\[[x ]\]\s*/.test text
+        if /^\s*\[x\]\s*/.test text
           text = text
             .replace /^\s*\[x\]\s*/, "<input type=\"checkbox\" checked>"
+          return "<li class=\"checkbox-item checkbox-item--checked\"><label>#{text}</label>#{nested}</li>"
+
+        if /^\s*\[ \]\s*/.test text
+          text = text
             .replace /^\s*\[ \]\s*/, "<input type=\"checkbox\">"
           return "<li class=\"checkbox-item\"><label>#{text}</label>#{nested}</li>"
         return "<li>#{text}#{nested}</li>"
