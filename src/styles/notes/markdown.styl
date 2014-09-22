@@ -106,37 +106,32 @@ $color-md-pre-bk = #efefef
   .checkbox-item
     list-style none
 
+    input
+      display none
+
     label
-      margin-left -24px
-      padding-right 2px
-      border-radius 2px
+      margin-left -20px
       cursor pointer
 
-      input
+      &:hover::before
+        color $color-dark-blue
+
+      &::before
         position relative
-        top 2px
-        margin-right 7px
-
-        &:before
-          display block
-          content ""
-          z-index -1
-          position absolute
-          top -2px
-          left -2px
-          right -1px
-          bottom -1px
-          border-radius 3px
-          background-color rgba(249,0,0,0.17)
-          opacity 0
-          transition opacity ease-in-out .2s
-
-      &:hover input:before
-        opacity 1
+        top 1px
+        display inline-block
+        content "\f096"
+        margin-right 8px
+        font-family FontAwesome
+        font-style normal
+        font-weight normal
+        line-height 1
+        font-smoothing antialiased
+        cursor pointer
 
     &--checked
       color $color-text-light
-      transition color ease-in-out .2s
 
-      &:hover
-        color inherit
+      & > label::before
+        content "\f14a"
+        margin-right 7px
