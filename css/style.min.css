@@ -1057,54 +1057,35 @@ body {
 .markdown .checkbox-item {
   list-style: none;
 }
+.markdown .checkbox-item input {
+  display: none;
+}
 .markdown .checkbox-item label {
-  margin-left: -24px;
-  padding-right: 2px;
-  -webkit-border-radius: 2px;
-  border-radius: 2px;
+  margin-left: -20px;
   cursor: pointer;
 }
-.markdown .checkbox-item label input {
+.markdown .checkbox-item label:hover::before {
+  color: #0e91b8;
+}
+.markdown .checkbox-item label::before {
   position: relative;
-  top: 2px;
-  margin-right: 7px;
-}
-.markdown .checkbox-item label input:before {
-  display: block;
-  content: "";
-  z-index: -1;
-  position: absolute;
-  top: -2px;
-  left: -2px;
-  right: -1px;
-  bottom: -1px;
-  -webkit-border-radius: 3px;
-  border-radius: 3px;
-  background-color: rgba(249,0,0,0.17);
-  opacity: 0;
-  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
-  filter: alpha(opacity=0);
-  -webkit-transition: opacity ease-in-out 0.2s;
-  -moz-transition: opacity ease-in-out 0.2s;
-  -o-transition: opacity ease-in-out 0.2s;
-  -ms-transition: opacity ease-in-out 0.2s;
-  transition: opacity ease-in-out 0.2s;
-}
-.markdown .checkbox-item label:hover input:before {
-  opacity: 1;
-  -ms-filter: none;
-  filter: none;
+  top: 1px;
+  display: inline-block;
+  content: "\f096";
+  margin-right: 8px;
+  font-family: FontAwesome;
+  font-style: normal;
+  font-weight: normal;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  cursor: pointer;
 }
 .markdown .checkbox-item--checked {
   color: rgba(0,0,0,0.54);
-  -webkit-transition: color ease-in-out 0.2s;
-  -moz-transition: color ease-in-out 0.2s;
-  -o-transition: color ease-in-out 0.2s;
-  -ms-transition: color ease-in-out 0.2s;
-  transition: color ease-in-out 0.2s;
 }
-.markdown .checkbox-item--checked:hover {
-  color: inherit;
+.markdown .checkbox-item--checked > label::before {
+  content: "\f14a";
+  margin-right: 7px;
 }
 .note-edit-header {
   padding: 0 16px;
@@ -1494,6 +1475,7 @@ body {
   -o-transform: translateY(-4px);
   -ms-transform: translateY(-4px);
   transform: translateY(-4px);
+  font-family: 'RobotoDraft', 'sans-serif';
 }
 .tooltip-left::after {
   right: 0;
