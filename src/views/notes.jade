@@ -112,7 +112,8 @@
               mode: 'markdown', \
               theme: 'tomorrow', \
               onLoad: aceLoaded}"
-            ng-model="storage.currentNote.editedContent")
+            ng-model="storage.currentNote.editedContent"
+            cm-focus="focusEditor")
 
   .l-modal.modal.cm-animated(ng-show="isCategoryDialogVisible")
     .l-modal-overlay.modal-overlay(ng-click="cancelEditingCategory()")

@@ -12,6 +12,8 @@ NotesCtrl = ($scope, $state, $stateParams, $window, $rootScope, Storage) ->
   $scope.isCategoryDialogVisible = false
   $scope.editedCategoryName = null
 
+  $scope.focusEditor = false
+
   $scope.showCategoryDialog = () ->
     return if not Storage.currentCategory
     $scope.isCategoryDialogVisible = true
@@ -90,6 +92,11 @@ NotesCtrl = ($scope, $state, $stateParams, $window, $rootScope, Storage) ->
     Storage.startEditing()
 
   $scope.saveEditing = () ->
+    note = Storage.currentNote
+    if not $scope.focusEditor and not note.objectId and not note.editedContent
+      $scope.focusEditor = true
+      return
+    $scope.focusEditor = false
     Storage.saveEditing()
 
   $scope.cancelEditing = () ->
@@ -97,6 +104,7 @@ NotesCtrl = ($scope, $state, $stateParams, $window, $rootScope, Storage) ->
 
 
   $scope.addNote = () ->
+    $scope.focusEditor = false
     $state.transitionTo 'notes.category', categoryId: Storage.currentCategory.objectId
       .then () ->
         Storage.addNote()
