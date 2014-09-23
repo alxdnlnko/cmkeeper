@@ -54,6 +54,7 @@ NotesCtrl = ($scope, $state, $stateParams, $window, $rootScope, Storage) ->
     #   bindKey: win: 'Ctrl-Shift-V', mac: 'Command-Option-V'
     #   exec: (editor) ->
     #     editor.setKeyboardHandler 'vim'
+
     ace.commands.addCommand
       name: 'removeLine'
       bindKey: win: 'Ctrl-X'
@@ -70,6 +71,42 @@ NotesCtrl = ($scope, $state, $stateParams, $window, $rootScope, Storage) ->
       exec: (editor) ->
         $scope.$apply () ->
           $scope.cancelEditing()
+    ace.commands.addCommand
+      name: 'togglecheckboxlistitem'
+      bindKey: win: 'Ctrl-Shift-C'
+      exec: (editor) ->
+        range = editor.getSelectionRange()
+        isBackwards = editor.selection.isBackwards()
+        selectionStart = if isBackwards then editor.selection.getSelectionLead() else editor.selection.getSelectionAnchor()
+        selectionEnd = if isBackwards then editor.selection.getSelectionAnchor() else editor.selection.getSelectionLead()
+
+        inserting = null
+        for i in [selectionStart.row..selectionEnd.row]
+          curLine = editor.session.doc.getLine i
+          continue if not /^\s*-/.test curLine
+
+          range.setStart i, 0
+          range.setEnd i, curLine.length
+
+          if inserting is null
+            if /^\s*- \[.\]\s*/.test curLine
+              inserting = false
+            else
+              inserting = true
+
+          if inserting and not /^\s*- \[.\]\s*/.test curLine
+            editor.session.doc.replace range, curLine.replace /- /, '- [ ] '
+          else if not inserting and /^\s*- \[.\]\s*/.test curLine
+            editor.session.doc.replace range, curLine.replace /- \[ \]/, '-'
+
+    rebindKeys = (name, keys) ->
+      cmd = ace.commands.commands['movelinesdown']
+      cmd.bindKey.win = 'Ctrl-Shift-down'
+      ace.commands.addCommand cmd
+
+    rebindKeys 'movelinesdown', 'Ctrl-Shift-down'
+    rebindKeys 'movelinesup', 'Ctrl-Shift-up'
+    rebindKeys 'copylinesup', 'Ctrl-Shift-enter'
 
   # UI handlers
   $scope.toggleNonArchived = () ->
