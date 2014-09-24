@@ -7,44 +7,137 @@ NotesCtrl = ($scope, $state, $stateParams, $window, $rootScope, Storage) ->
   $scope.showNonArcihved = true
   $scope.showArcihved = true
   $scope.categoriesOrder = 'created'
-  $scope.isNoteMenuVisible = false
-
   $scope.isCategoryDialogVisible = false
   $scope.editedCategoryName = null
-
   $scope.focusEditor = false
 
-  $scope.showCategoryDialog = () ->
+
+
+  # categories
+  $scope.categoryAdd = () ->
+    Storage.categoryAdd()
+
+  $scope.categorySaveNew = () ->
+    Storage.categorySaveNew()
+
+  $scope.categoryCancelNew = () ->
+    Storage.categoryCancelNew()
+
+  $scope.categoryShowDialog = () ->
     return if not Storage.currentCategory
     $scope.isCategoryDialogVisible = true
 
-  $scope.hideCategoryDialog = () ->
+  $scope.categoryHideDialog = () ->
     $scope.isCategoryDialogVisible = false
 
-  $scope.editCategory = () ->
+  $scope.categoryEdit = () ->
     return if not Storage.currentCategory
     $scope.editedCategoryName = Storage.currentCategory.name
-    $scope.showCategoryDialog()
+    $scope.categoryShowDialog()
 
-  $scope.cancelEditingCategory = () ->
-    $scope.editedCategoryName = null
-    $scope.hideCategoryDialog()
-
-  $scope.saveEditedCategory = () ->
+  $scope.categorySaveEdited = () ->
     return if not Storage.currentCategory or not $scope.editedCategoryName
     cat = Storage.currentCategory
     cat.name = $scope.editedCategoryName
     cat.save()
 
     $scope.editedCategoryName = null
-    $scope.hideCategoryDialog()
+    $scope.categoryHideDialog()
 
-  $scope.showNoteMenu = () ->
-    $scope.isNoteMenuVisible = true
+  $scope.categoryCancelEdited = () ->
+    $scope.editedCategoryName = null
+    $scope.categoryHideDialog()
 
-  $scope.hideNoteMenu = () ->
-    $scope.isNoteMenuVisible = false
 
+
+  # UI handlers
+  $scope.toggleNonArchived = () ->
+    $scope.showNonArcihved = not $scope.showNonArcihved
+
+  $scope.toggleArchived = () ->
+    $scope.showArcihved = not $scope.showArcihved
+
+  $scope.archiveNote = () ->
+    Storage.archiveNote()
+
+  $scope.unarchiveNote = () ->
+    Storage.unarchiveNote()
+
+  $scope.deleteNote = () ->
+    if confirm "Are you sure want to delete the note?"
+      Storage.deleteNote()
+
+  $scope.startEditing = () ->
+    Storage.startEditing()
+
+  $scope.saveEditing = () ->
+    note = Storage.currentNote
+    if not $scope.focusEditor and not note.objectId and not note.editedContent
+      $scope.focusEditor = true
+      return
+    $scope.focusEditor = false
+    Storage.saveEditing()
+
+  $scope.cancelEditing = () ->
+    Storage.cancelEditing()
+
+  $scope.addNote = () ->
+    $scope.focusEditor = false
+    $state.transitionTo 'notes.category', categoryId: Storage.currentCategory.objectId
+      .then () ->
+        Storage.addNote()
+
+
+
+  # filters
+  $scope.filterNonArchived = (note) ->
+    return not note.archived
+
+  $scope.filterArchived = (note) ->
+    return note.archived
+
+
+
+  # keyEvents
+  $scope.newCategoryInputKey = (ev) ->
+    switch ev.keyCode
+      when 27
+        $scope.categoryCancelNew()
+
+  $scope.editNoteInputKey = (ev) ->
+    switch ev.keyCode
+      when 27
+        $scope.cancelEditing()
+
+  $scope.editCategoryInputKey = (ev) ->
+    switch ev.keyCode
+      when 27
+        $scope.categoryCancelEdited()
+
+
+
+  # state events
+  stateChanged = () ->
+    switch $state.current.name
+      when 'notes'
+        Storage.selectCategory null
+      when 'notes.category'
+        Storage.selectNote null
+    true
+
+
+
+  # events
+  $scope.$on 'newNoteSaved', (event, note) ->
+    if note is Storage.currentNote
+      $state.go 'notes.category.note',
+        categoryId: Storage.currentCategory.objectId
+        noteId: Storage.currentNote.objectId
+  $scope.$on '$stateChangeSuccess', stateChanged
+
+
+
+  # ace editor configuration
   $scope.aceLoaded = (ace) ->
     ace.setHighlightActiveLine false
     ace.setShowPrintMargin false
@@ -108,113 +201,6 @@ NotesCtrl = ($scope, $state, $stateParams, $window, $rootScope, Storage) ->
     rebindKeys 'movelinesup', 'Ctrl-Shift-up'
     rebindKeys 'copylinesup', 'Ctrl-Shift-enter'
 
-  # UI handlers
-  $scope.toggleNonArchived = () ->
-    $scope.showNonArcihved = not $scope.showNonArcihved
-
-  $scope.toggleArchived = () ->
-    $scope.showArcihved = not $scope.showArcihved
-
-  $scope.archiveNote = () ->
-    Storage.archiveNote()
-
-  $scope.unarchiveNote = () ->
-    Storage.unarchiveNote()
-
-  $scope.deleteNote = () ->
-    if confirm "Are you sure want to delete the note?"
-      Storage.deleteNote()
-
-  $scope.startEditing = () ->
-    Storage.startEditing()
-
-  $scope.saveEditing = () ->
-    note = Storage.currentNote
-    if not $scope.focusEditor and not note.objectId and not note.editedContent
-      $scope.focusEditor = true
-      return
-    $scope.focusEditor = false
-    Storage.saveEditing()
-
-  $scope.cancelEditing = () ->
-    Storage.cancelEditing()
-
-
-  $scope.addNote = () ->
-    $scope.focusEditor = false
-    $state.transitionTo 'notes.category', categoryId: Storage.currentCategory.objectId
-      .then () ->
-        Storage.addNote()
-
-  $scope.addCategory = () ->
-    Storage.addCategory()
-
-  $scope.saveCategory = () ->
-    Storage.saveNewCategory()
-
-  $scope.cancelNewCategory = () ->
-    Storage.cancelNewCategory()
-
-
-  # filters
-  $scope.filterNonArchived = (note) ->
-    return not note.archived
-
-  $scope.filterArchived = (note) ->
-    return note.archived
-
-
-  # keyEvents
-  $scope.newCategoryInputKey = (ev) ->
-    switch ev.keyCode
-      when 27
-        $scope.cancelNewCategory()
-
-  $scope.editNoteInputKey = (ev) ->
-    switch ev.keyCode
-      when 27
-        $scope.cancelEditing()
-
-  $scope.editCategoryInputKey = (ev) ->
-    switch ev.keyCode
-      when 27
-        $scope.cancelEditingCategory()
-
-  # parse url, render the page
-  stateChanged = () ->
-    switch $state.current.name
-      when 'notes'
-        Storage.selectCategory null
-      when 'notes.category'
-        Storage.selectNote null
-
-        # break
-      # when 'notes.category'
-        # Storage.selectCategory $stateParams.categoryId, (err) ->
-          # $window.location.hash = "/" if err
-      # when 'notes.note'
-        # Storage.selectCategory $stateParams.categoryId, (err) ->
-        #   if err
-        #     $window.location.hash = "/"
-        #     return
-        #   Storage.selectNote $stateParams.noteId, (err) ->
-        #     $window.location.hash = "/#{$stateParams.categoryId}" if err
-    true
-
-  # events
-  $scope.$on 'newNoteSaved', (event, note) ->
-    if note is Storage.currentNote
-      $state.go 'notes.category.note',
-        categoryId: Storage.currentCategory.objectId
-        noteId: Storage.currentNote.objectId
-
-  # init controller
-  # - load categories
-  # - set the url change callback
-  # - call the update page
-  # Storage.loadCategories () ->
-  $scope.$on '$stateChangeSuccess', stateChanged
-  # stateChanged()
 
 angular.module 'CMKeeper'
 	.controller 'NotesCtrl', [

@@ -8,12 +8,12 @@
               href="#/{{ category.objectId }}",
               ng-class="{'category--active': category == storage.currentCategory}") {{ category.name }}
       .category-add-block
-        .category-add(ng-hide="storage.newCategory" ng-click="addCategory()")
+        .category-add(ng-hide="storage.newCategory" ng-click="categoryAdd()")
           .category-add-icon.fa.fa-plus
           span.category-add-text New category
         .category-add.category-add--editing(ng-show="storage.newCategory")
-          .category-add-save-icon.fa.fa-check(href="#" ng-click="saveCategory()")
-          form(ng-submit="saveCategory()")
+          .category-add-save-icon.fa.fa-check(href="#" ng-click="categorySaveNew()")
+          form(ng-submit="categorySaveNew()")
             input.category-add-name(
                 type="text"
                 ng-model="storage.newCategory.name"
@@ -34,7 +34,7 @@
         .caption-item.caption-note-name.cm-animated(ng-show="storage.currentNote") {{ storage.currentNote.name }}
       .l-header-actions.header-actions(ng-show="storage.currentCategory")
         .header-action.header-action-settings.fa.fa-cog.tooltip.tooltip-left(
-            ng-click="editCategory()"
+            ng-click="categoryEdit()"
             data-tooltip="Edit category")
 
     .l-notes-bar.notes-bar
@@ -116,12 +116,12 @@
             cm-focus="focusEditor")
 
   .l-modal.modal.cm-animated(ng-show="isCategoryDialogVisible")
-    .l-modal-overlay.modal-overlay(ng-click="cancelEditingCategory()")
+    .l-modal-overlay.modal-overlay(ng-click="categoryCancelEdited()")
     .l-dialog.dialog.category-dialog
       .dialog-wrapper
         .dialog-title Edit category
         .dialog-content
-          form(ng-submit="saveEditedCategory()")
+          form(ng-submit="categorySaveEdited()")
             input.dialog-input.category-edit-input(
                 ng-keyup="editCategoryInputKey($event)"
                 ng-model="editedCategoryName"
@@ -129,5 +129,5 @@
                 placeholder="Category name")
       .dialog-actions
         .dialog-action.dialog-action-left Delete
-        .dialog-action.dialog-action-primary(ng-click="saveEditedCategory()") Save
-        .dialog-action(ng-click="cancelEditingCategory()") Cancel
+        .dialog-action.dialog-action-primary(ng-click="categorySaveEdited()") Save
+        .dialog-action(ng-click="categoryCancelEdited()") Cancel

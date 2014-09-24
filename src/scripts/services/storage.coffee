@@ -1,13 +1,29 @@
 Storage = (Note, Category, Errors, $rootScope, $q) ->
   @categories = []
   @currentCategory = null
-
   @notes = []
   @currentNote = null
-
   @newCategory = null
-
   @isLoadingNotes = false
+
+
+
+  # categories
+  @categoryAdd = () ->
+    @newCategory = new Category()
+
+  @categorySaveNew = () ->
+    if not @newCategory.name
+      @newCategory = null
+      return
+    category = @newCategory
+    category.created = new Date()
+    @categories.push category
+    category.save()
+    @newCategory = null
+
+  @categoryCancelNew = () ->
+    @newCategory = null
 
   @loadCategories = () ->
     deferred = $q.defer()
@@ -34,6 +50,9 @@ Storage = (Note, Category, Errors, $rootScope, $q) ->
     @currentCategory = category
     return category
 
+
+
+  # notes
   @loadNotes = (categoryId) ->
     deferred = $q.defer()
     @isLoadingNotes = true
@@ -60,22 +79,6 @@ Storage = (Note, Category, Errors, $rootScope, $q) ->
     return false if not note
     @currentNote = note
     return note
-
-  @addCategory = () ->
-    @newCategory = new Category()
-
-  @saveNewCategory = () ->
-    if not @newCategory.name
-      @newCategory = null
-      return
-    category = @newCategory
-    category.created = new Date()
-    @categories.push category
-    category.save()
-    @newCategory = null
-
-  @cancelNewCategory = () ->
-    @newCategory = null
 
   @archiveNote = () ->
     return if not @currentNote
